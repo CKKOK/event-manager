@@ -1,3 +1,4 @@
+
 # Project 3 (Need a name)
 
 # Ideas
@@ -10,7 +11,9 @@
  * How does the ERD look like? Will it be too massive?
 3. Spinoff of events management app: events registration app with QR code scanning capabilities
 4. Equipment / venue rental service, combined with geolocation data and B2C communication
-
+5. Price and stock collation of IT equipment, i.e. advertising platform for IT vendors.
+ * User stories from the vendors and buyers? What problem does this solve for both parties? Note: Some shops do advertise their stuff on Carousell, so why aren't the rest doing it? Need to understand the problems they face first.
+ 
 # Tasks
 1. Front end
   * Design, i.e. moodboard
