@@ -13,3 +13,4 @@
 2. Back end
   * CRUD functionality
   * Other business logic / data processing tasks...
+  * Writing tests (using rspec)
