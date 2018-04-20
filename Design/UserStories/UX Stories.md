@@ -28,7 +28,7 @@ User Stories (For Service Usage) (To be fleshed out into specifics for wireframe
 1. Couple registration
 2. Uploading of invitation list
 3. Invitees' form (inc. dietary requirements, +1, kids, parking needs) for RSVP
-4. Online RSVP-ed guest list (for registration purposes on the big day)
+4. Online RSVP-ed guest list (for registration purposes on the big day) for attendance taking
 
 
 Service Components
