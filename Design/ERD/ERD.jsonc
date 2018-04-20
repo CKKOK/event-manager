@@ -1,0 +1,33 @@
+// Format
+entityName = {
+    fieldName: fieldType
+    ...
+}
+
+// Relationship Specification
+entityName--(type)--entityName
+where type = 1-1, 1-M, M-1, or M-M
+
+//====================================================
+user = {
+    name: text,
+    email: email,
+    password: text,
+    role: groom, bride, helper, guest, photographer, ???
+    weddingDateTime: dateTime
+}
+
+guest = {
+    name: text,
+    relation: text, //whose side, bride or groom?
+    attending: boolean,
+    message: text,
+    diet: normal, halal, vegetarian, ???
+    additionalPersons: integers (non-negative),
+    numBabies: integer,
+    numToddlers: integer,
+    requireCarpark: boolean,
+    attended: boolean
+}
+
+user--1-M--guest
