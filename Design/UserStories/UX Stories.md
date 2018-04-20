@@ -15,7 +15,7 @@ Problem Statements
 POV Statements
 ==============
 Our service can address the above needs with the following functions...
-1. Notifying of guests via email, and RSVP from guests through that email (inc. dietary requirements, +1, kids?)
+1. Notifying of guests via email, and RSVP from guests through that email (inc. dietary requirements, +1, kids, parking needs)
     * Guest registration and (graphical) table allocation
     * (Good-to-have) Ruby QR Code Generator: https://github.com/whomwah/rqrcode and HTML5/JS QR Code Reader: https://github.com/schmich/instascan 
 2. For each role, a timeline panel and an update / next-action-to-take panel. Couple / another admin can have an overview.
@@ -23,10 +23,12 @@ Our service can address the above needs with the following functions...
     * Photo uploads by photographer and guest. Admins can delete all. Guests can delete their own photo.
     * Photo filters when displayed, but not direct editing of the photo itself
 
-User Stories (For Service Usage)
-================================
-1.  
-
+User Stories (For Service Usage) (To be fleshed out into specifics for wireframe design)
+========================================================================================
+1. Couple registration
+2. Uploading of invitation list
+3. Invitees' form (inc. dietary requirements, +1, kids, parking needs) for RSVP
+4. Online guest list (for registration purposes on the big day)
 
 
 Service Components
@@ -34,4 +36,4 @@ Service Components
 What UI elements are needed?
 What are their functions?)
 ============================
-1.  
+1. 
