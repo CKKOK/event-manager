@@ -26,7 +26,7 @@ User Stories (For Service Usage) (To be fleshed out into specifics for wireframe
 ========================================================================================
 1. (JT) Couple registration
 2. (JT) Uploading of invitation list
-3. (CK) Invitees' forms (inc. dietary requirements, +1, kids, parking needs) for RSVP. See ../Wireframes/RSVP - Yes.png and ../Wireframes/RSVP - No.png for example.
+3. (CK) Invitees' forms (inc. dietary requirements, +1, kids, parking needs) for RSVP. See [RSVP - Yes]("../Wireframes/RSVP - Yes.png?raw=true") and [RSVP - No]("../Wireframes/RSVP - No.png?raw=true") for examples.
     *   From the email, the invitee taps on either a "Congratulations! I'll be right there!" or a "Terribly sorry but I can't be there" option from the email. If the invitee would like to attend, the couple will need some details from the invitee. If not, perhaps the invitee might not be able to attend due to scheduling conflicts but would still like to leave the couple his/her well wishes.
     *   *"Congratulations! I'll be right there!"*
         *   The invitee is directed to a form that has his/her name and contact pre-filled. The cover page of the form is a picture of the couple thanking him/her, which slides up to reveal the form. The data that needs to be collected are:
@@ -38,7 +38,7 @@ User Stories (For Service Usage) (To be fleshed out into specifics for wireframe
     *   *"Terribly sorry but I can't be there"*
         *   The invitee is directed to a simple form with a single field. There is no cover page. It simply says "Aw would you like to leave the couple a lovely message instead?", in case he/she would like to offer a reason for absence. The cursor is autofocused on the input text area. There are 2 buttons below - "No I'm good", and "Yup send this" (which is initially disabled, then enabled as soon as there is input in the box).
 4. (JP) Online RSVP-ed guest list (for registration purposes on the big day) for 
-![Attendance Sheet](/UserStories/attendanceSheet.png?raw=true "Attendance Sheet")
+![Attendance Sheet](attendanceSheet.png?raw=true "Attendance Sheet")
 * One page web page to display the full attendance list
 * Two drop down tab on the right with fixed position to display live count for total guests and individual table filled rate
 * Table which consist of the whole list of rsvp guests
