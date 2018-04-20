@@ -26,7 +26,7 @@ User Stories (For Service Usage) (To be fleshed out into specifics for wireframe
 ========================================================================================
 1. (JT) Couple registration
 2. (JT) Uploading of invitation list
-3. (CK) Invitees' form (inc. dietary requirements, +1, kids, parking needs) for RSVP
+3. (CK) Invitees' forms (inc. dietary requirements, +1, kids, parking needs) for RSVP. See ../Wireframes/RSVP - Yes.png and ../Wireframes/RSVP - No.png for example.
     *   From the email, the invitee taps on either a "Congratulations! I'll be right there!" or a "Terribly sorry but I can't be there" option from the email. If the invitee would like to attend, the couple will need some details from the invitee. If not, perhaps the invitee might not be able to attend due to scheduling conflicts but would still like to leave the couple his/her well wishes.
     *   *"Congratulations! I'll be right there!"*
         *   The invitee is directed to a form that has his/her name and contact pre-filled. The cover page of the form is a picture of the couple thanking him/her, which slides up to reveal the form. The data that needs to be collected are:
