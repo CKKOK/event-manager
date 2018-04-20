@@ -4,14 +4,29 @@ entityName = {
     ...
 }
 
-relationshipName = {
-    from: entity
-    to: entity
-    relationType: 1-1, 1-M, M-M, M-1
-}
+// Relationship Specification
+entityName--(type)--entityName
+where type = 1-1, 1-M, M-1, or M-M
 
 //====================================================
-guest = {
-    name: text
-    relation: text //whose side, bride or groom?
+user = {
+    name: text,
+    email: email,
+    password: text,
+    weddingDateTime: dateTime
 }
+
+guest = {
+    name: text,
+    relation: text, //whose side, bride or groom?
+    attending: boolean,
+    message: text,
+    diet: normal, halal, vegetarian, ???
+    additionalPersons: integers (positive),
+    numBabies: integer,
+    numToddlers: integer,
+    requireCarpark: boolean,
+    attended: boolean
+}
+
+user--1-M--guest
