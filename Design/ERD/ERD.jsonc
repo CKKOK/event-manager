@@ -12,9 +12,7 @@ where type = 1-1, 1-M, M-1, or M-M
 user = {
     name: text,
     email: email,
-    password: text,
-    role: groom / bride / helper / guest / photographer, ???
-    weddingDateTime: dateTime
+    password: text
 }
 
 event = {
