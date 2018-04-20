@@ -18,12 +18,12 @@ user = {
 event = {
     dateTime: dateTime,
     user: foreign_key,
-    userRole: organizer / guest,
     userEventData: foreign_key
 }
 
 userEventData = {
     relation: text,
+    userRole: organizer / guest,
     attending: boolean,
     diet: normal / halal / vegetarian, ???
     additionalPersons: integer (non-negative),
