@@ -34,7 +34,20 @@ userEventData = {
 }
 
 user--M-M--event,
-event-1-M-userEventData
+event--1-M--userEventData
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //=========================================================
 guest = {
