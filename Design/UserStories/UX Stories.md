@@ -37,8 +37,7 @@ User Stories (For Service Usage) (To be fleshed out into specifics for wireframe
             *   Require carpark?
     *   *"Terribly sorry but I can't be there"*
         *   The invitee is directed to a simple form with a single field. There is no cover page. It simply says "Aw would you like to leave the couple a lovely message instead?", in case he/she would like to offer a reason for absence. The cursor is autofocused on the input text area. There are 2 buttons below - "No I'm good", and "Yup send this" (which is initially disabled, then enabled as soon as there is input in the box).
-4. (JP) Online RSVP-ed guest list (for registration purposes on the big day) for 
-![Attendance Sheet](attendanceSheet.png?raw=true "Attendance Sheet")
+4. (JP) Online RSVP-ed guest list (for registration purposes on the big day) for [Attendance Sheet](../Wireframes/attendanceSheet.png?raw=true)
 * One page web page to display the full attendance list
 * Two drop down tab on the right with fixed position to display live count for total guests and individual table filled rate
 * Table which consist of the whole list of rsvp guests
