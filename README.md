@@ -23,16 +23,6 @@
 8. ~~Coding game app~~
 9. ~~E-commerce site~~
 
-# Tasks
-1. Front end
-  * Design, i.e. moodboard
-  * Standard new / edit / index / show views
-  * SCSS
-2. Back end
-  * CRUD functionality
-  * Other business logic / data processing tasks...
-  * Writing tests (using rspec)
-
 # Tech Stack
 1. Server:
   * Ruby and Rails
@@ -40,9 +30,38 @@
 2. Client:
   * PWA for notifications???
 
-# Site Functionality
-1. User Registration Page
-2. User Log-in Page
-3. RSVP --> Guests List
-4. Tasks Check List
-5. Vendors List
+# Tasks
+1. Front end
+  * Design, i.e. moodboard
+  * Standard new / edit / index / show views
+  * SCSS
+2. Back end
+  * CRUD functionality
+  * API implementation
+  * Writing tests (using rspec)
+
+Service Components
+(What are the front-ends?
+What UI elements are needed?
+What are their functions?)
+============================
+1.  Landing / login page
+2.  User registration
+3.  HTML email form
+4.  RSVP - Yes form
+5.  RSVP - No form
+6.  Guest list for attendance taking
+
+
+APIs Needed (No authorization)
+==============================
+
+
+APIs Needed (Require authorization)
+=======================================
+1.  Pushing of invitation list to the database (returns success indicator)
+2.  Pushing of a guest's RSVP data to the database (returns success indicator)
+3.  Retrieval of RSVP Yes guests (returns success indicator, and the guests who replied yes, along with their dietary requirements etc)
+4.  Retrieval of RSVP No guests (returns success indicator, and the guests who replied no)
+5.  Marking a guest as present (returns success indicator, the number of guests present, and number of guests in total)
+6.  Marking a guest as absent (returns success indicator, the number of guests absent, and number of guests in total)

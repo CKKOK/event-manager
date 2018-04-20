@@ -44,29 +44,3 @@ User Stories (For Service Usage) (To be fleshed out into specifics for wireframe
 * Search function to search for guest by name or table number
 * Sorting function to sort rsvp list by name or table
 * One click attendance taking tab which will toggle from red *"I am coming soon"* to green *"I'm Here!"*. Green status will be automatically sorted at the bottom of the rsvp list.
-
-Service Components
-(What are the front-ends?
-What UI elements are needed?
-What are their functions?)
-============================
-1.  Landing / login page
-2.  User registration
-3.  HTML email form
-4.  RSVP - Yes form
-5.  RSVP - No form
-6.  Guest list for attendance taking
-
-
-APIs Needed (No authorization)
-==============================
-
-
-APIs Needed (Require authorization)
-=======================================
-1.  Pushing of invitation list to the database (returns success indicator)
-2.  Pushing of a guest's RSVP data to the database (returns success indicator)
-3.  Retrieval of RSVP Yes guests (returns success indicator, and the guests who replied yes, along with their dietary requirements etc)
-4.  Retrieval of RSVP No guests (returns success indicator, and the guests who replied no)
-5.  Marking a guest as present (returns success indicator, the number of guests present, and number of guests in total)
-6.  Marking a guest as absent (returns success indicator, the number of guests absent, and number of guests in total)

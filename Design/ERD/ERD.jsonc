@@ -9,25 +9,30 @@ entityName--(type)--entityName
 where type = 1-1, 1-M, M-1, or M-M
 
 //====================================================
-user = {
+User = {
     name: text,
     email: email,
     password: text
 }
 
-event = {
+Event = {
     dateTime: dateTime,
+    title: text
+}
+
+UsersEvents = {
+    event: foreign_key,
     user: foreign_key,
     userEventData: foreign_key
 }
 
-userEventData = {
+UserEventData = {
     relation: text,
     userRole: organizer / guest,
     attending: boolean,
     diet: normal / halal / vegetarian, ???
     additionalPersons: integer (non-negative),
-    numBabies: integer (non-negative),
+    numBabies: integer (non-negative), 
     numToddlers: integer (non-negative),
     requireCarpark: boolean,
     attended: boolean
