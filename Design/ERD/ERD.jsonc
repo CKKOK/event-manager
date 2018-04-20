@@ -13,6 +13,7 @@ user = {
     name: text,
     email: email,
     password: text,
+    role: groom, bride, weddingOrganizer, guest, ???
     weddingDateTime: dateTime
 }
 
@@ -22,7 +23,7 @@ guest = {
     attending: boolean,
     message: text,
     diet: normal, halal, vegetarian, ???
-    additionalPersons: integers (positive),
+    additionalPersons: integers (non-negative),
     numBabies: integer,
     numToddlers: integer,
     requireCarpark: boolean,
