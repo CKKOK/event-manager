@@ -13,4 +13,5 @@ relationshipName = {
 //====================================================
 guest = {
     name: text
+    relation: text //whose side, bride or groom?
 }

@@ -14,3 +14,10 @@ User Stories
 
 POV Statements
 ==============
+Our website can address the above needs with the following functions...
+1. Notifying of guests via email, and RSVP from guests through that email (inc. dietary requirements, +1, kids?)
+2. Photography Component: Couple, photographer, guest, wedding planner (assigned by the couple)
+    * Photo uploads by photographer and guest. Admins can delete all. Guests can delete their own photo.
+    * Photo filters when displayed, but not direct editing of the photo itself
+3. Guest registration and (graphical) table allocation
+4. For each role, a timeline panel and an update / next-action-to-take panel. Couple / another admin can have an overview.
