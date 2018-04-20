@@ -5,6 +5,8 @@ User Stories
 2. As a __first-time-groom-to-be__ (how many aren't first-timers?!), I don't know about the __logistics__ involved in the entire wedding process and __how much resources I need to budget for it__.
 3. As a __couple__, we want __creative ideas for our wedding__ to make it a really memorable once-in-a-lifetime bang of an event!
 4. As a __couple__, the __wedding banquet guest invitation, registration, and table assigning is very time consuming__.
+5. As a __guest__ with a lot going on in my schedule, I'm really afraid that I'll __forget an important friend's wedding__!
+6. As a __guest__, I __don't know how much ang bao money__ I should give...
 
 POV Statements
 ==============
