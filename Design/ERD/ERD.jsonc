@@ -13,7 +13,7 @@ user = {
     name: text,
     email: email,
     password: text,
-    role: groom, bride, weddingOrganizer, guest, ???
+    role: groom, bride, helper, guest, photographer, ???
     weddingDateTime: dateTime
 }
 
