@@ -28,34 +28,28 @@
   * Ruby and Rails
   * Devise
 2. Client:
+  * Semantic UI
   * PWA for notifications???
 
 # Tasks
 1. Front end
   * Design, i.e. moodboard
-  * Standard new / edit / index / show views
   * SCSS
+  * (JT) Landing / login page
+  * (JT) User registration
+  * (JT) Dashboard after logging in. This should display the user's events, as well as an option to create an event. When the user accesses each event, what he sees is tied to his role in that event. If he is an organizer (groom), he should see the invitation form which he is able to invite people to his wedding with, and the guest list which shows who has RSVP-ed and who hasn't (and their RSVP results). If he is a guest, he should be able to see the RSVP page (similar to the email that is to be sent to him).
+  * (JT) RSVP forms (Main, yes and No)
+  * (JT) Guest list for attendance taking
+
 2. Back end
-  * CRUD functionality
-  * API implementation
+  * (JP) CRUD functionality - Users / user registration
+  * (JP) CRUD functionality - Events
+  * (CK) User authentication 
+  * (CK) User authorization
+  * (CK) CRUD functionality - Temporary users (guests without account)
+  * (CK) API implementation - email - check the 'roo' gem to parse xlsx and csv files. Look into the standard Rails mailer function.
+  * (JP) API implementation - guest attendance taking
   * Writing tests (using rspec)
-
-Service Components
-(What are the front-ends?
-What UI elements are needed?
-What are their functions?)
-============================
-1.  Landing / login page
-2.  User registration
-3.  HTML email form
-4.  RSVP - Yes form
-5.  RSVP - No form
-6.  Guest list for attendance taking
-
-
-APIs Needed (No authorization)
-==============================
-
 
 APIs Needed (Require authorization)
 =======================================
