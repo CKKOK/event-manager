@@ -9,12 +9,12 @@ User Stories
 6. As a __guest__ with a lot going on in my schedule, I'm really afraid that I'll __forget an important friend's wedding__!
 7. As a __guest__, I __don't know how much ang bao money__ I should give...
 8. As a __invited guest of the groom__, I want to __be able to access the photographer's photography as well as other user's upload at a central location__ so i can __keep the memories of the wedding that i want__.
-9. As a __wedding merchant (photographer)__, I want to __have a central platform__ so i can __effectievly reach out to couple planning to get married__.
+9. As a __wedding merchant (photographer)__, I want to __have a central platform__ so i can __effectively reach out to couple planning to get married__.
 
 
 POV Statements
 ==============
-Our website can address the above needs with the following functions...
+Our service can address the above needs with the following functions...
 1. Notifying of guests via email, and RSVP from guests through that email (inc. dietary requirements, +1, kids?)
     * Guest registration and (graphical) table allocation
     * (Good-to-have) Ruby QR Code Generator: https://github.com/whomwah/rqrcode and HTML5/JS QR Code Reader: https://github.com/schmich/instascan 
