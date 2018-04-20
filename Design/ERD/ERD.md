@@ -1,12 +1,13 @@
-Format
-======
-entityName {
+// Format
+entityName = {
     fieldName: fieldType
     ...
 }
 
-relationshipName {
+relationshipName = {
     from: entity
     to: entity
     relationType: 1-1, 1-M, M-M, M-1
 }
+
+//====================================================
