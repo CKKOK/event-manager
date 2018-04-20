@@ -24,7 +24,7 @@ Our service can address the above needs with the following functions...
 
 User Stories (For Service Usage) (To be fleshed out into specifics for wireframe design)
 ========================================================================================
-1. (JT) Couple registration
+1. (JT) Couple registration - Landing Pages [001](../Wireframes/LandingPage001.jpeg?raw=true), [002](../Wireframes/LandingPage002.jpeg?raw=true), [003](../Wireframes/LandingPage003.jpeg?raw=true), [004](../Wireframes/LandingPage004.jpeg?raw=true)
 2. (JT) Uploading of invitation list
 3. (CK) Invitees' forms (inc. dietary requirements, +1, kids, parking needs) for RSVP. See [RSVP - Yes](../Wireframes/RSVPYes.png?raw=true) and [RSVP - No](../Wireframes/RSVPNo.png?raw=true) for examples.
     *   From the email, the invitee taps on either a "Congratulations! I'll be right there!" or a "Terribly sorry but I can't be there" option from the email. If the invitee would like to attend, the couple will need some details from the invitee. If not, perhaps the invitee might not be able to attend due to scheduling conflicts but would still like to leave the couple his/her well wishes.
