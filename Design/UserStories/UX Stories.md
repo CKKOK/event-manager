@@ -1,5 +1,5 @@
-User Stories
-============
+Problem Statements
+==================
 
 1. As a __groom-to-be__, I have __too many events happening__ on the big day and wish they would be __organized in an glanceable and actionable manner__.
 2. As a __first-time-groom-to-be__ (how many aren't first-timers?!), I don't know about the __logistics__ involved in the entire wedding process and __how much resources I need to budget for it__.
@@ -18,7 +18,20 @@ Our service can address the above needs with the following functions...
 1. Notifying of guests via email, and RSVP from guests through that email (inc. dietary requirements, +1, kids?)
     * Guest registration and (graphical) table allocation
     * (Good-to-have) Ruby QR Code Generator: https://github.com/whomwah/rqrcode and HTML5/JS QR Code Reader: https://github.com/schmich/instascan 
-2. Photography Component: Couple, photographer, guest, wedding planner (assigned by the couple)
+2. For each role, a timeline panel and an update / next-action-to-take panel. Couple / another admin can have an overview.
+3. Photography Component: Couple, photographer, guest, wedding planner (assigned by the couple)
     * Photo uploads by photographer and guest. Admins can delete all. Guests can delete their own photo.
     * Photo filters when displayed, but not direct editing of the photo itself
-3. For each role, a timeline panel and an update / next-action-to-take panel. Couple / another admin can have an overview.
+
+User Stories (For Service Usage)
+================================
+1.  
+
+
+
+Service Components
+(What are the front-ends?
+What UI elements are needed?
+What are their functions?)
+============================
+1.  
