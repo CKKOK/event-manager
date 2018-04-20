@@ -13,10 +13,32 @@ user = {
     name: text,
     email: email,
     password: text,
-    role: groom, bride, helper, guest, photographer, ???
+    role: groom / bride / helper / guest / photographer, ???
     weddingDateTime: dateTime
 }
 
+event = {
+    dateTime: dateTime,
+    user: foreign_key,
+    userRole: organizer / guest,
+    userEventData: foreign_key
+}
+
+userEventData = {
+    relation: text,
+    attending: boolean,
+    diet: normal / halal / vegetarian, ???
+    additionalPersons: integer (non-negative),
+    numBabies: integer (non-negative),
+    numToddlers: integer (non-negative),
+    requireCarpark: boolean,
+    attended: boolean
+}
+
+user--M-M--event,
+event-1-M-userEventData
+
+//=========================================================
 guest = {
     name: text,
     relation: text, //whose side, bride or groom?
@@ -30,4 +52,3 @@ guest = {
     attended: boolean
 }
 
-user--1-M--guest
