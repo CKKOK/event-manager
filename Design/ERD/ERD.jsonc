@@ -15,35 +15,44 @@ User = {
     password: text
 }
 
-Event = {
-    dateTime: dateTime,
-    title: text
+events = {
+    title: text,
+    date_time: dateTime
 }
 
-UsersEvents = {
+users_events = {
     event: foreign_key,
     user: foreign_key,
     userEventData: foreign_key
 }
 
-UserEventData = {
+users_events_data = {
     relation: text,
-    userRole: organizer / guest,
+    user_role: organizer / guest,
     attending: boolean,
     diet: normal / halal / vegetarian, ???
-    additionalPersons: integer (non-negative),
-    numBabies: integer (non-negative), 
-    numToddlers: integer (non-negative),
-    requireCarpark: boolean,
+    additional_persons: integer (non-negative),
+    num_babies: integer (non-negative), 
+    num_toddlers: integer (non-negative),
+    require_carpark: boolean,
     attended: boolean
 }
 
-user--M-M--event,
-event--1-M--userEventData
-
-tempUsers = {
-    
+rsvp_lists = {
+    event: id,
+    name: text,
+    email: email,
+    key: text (hash of email + event)
 }
+
+guest_users = {
+    key: text (referencing rsvp_lists.key)
+}
+
+users--M-M--events,
+events--1-M--users_events_data,
+events--1-1--rsvp_lists,
+
 
 
 
