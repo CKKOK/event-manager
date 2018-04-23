@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  relation: MyText
+  user_role: MyText
+  attending: false
+  diet: MyText
+  additional_persons: 1
+  num_babies: 1
+  num_toddlers: 1
+  require_carpark: false
+  attended: false
+
+two:
+  relation: MyText
+  user_role: MyText
+  attending: false
+  diet: MyText
+  additional_persons: 1
+  num_babies: 1
+  num_toddlers: 1
+  require_carpark: false
+  attended: false
