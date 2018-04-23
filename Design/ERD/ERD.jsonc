@@ -45,10 +45,6 @@ rsvp_lists = {
     key: text (hash of email + event)
 }
 
-guest_users = {
-    key: text (referencing rsvp_lists.key)
-}
-
 users--M-M--events,
 events--1-M--users_events_data,
 events--1-1--rsvp_lists,
