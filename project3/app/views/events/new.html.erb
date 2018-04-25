@@ -1,0 +1,19 @@
+<h1>Create New Event</h1>
+
+<%= form_with scope: :event, url: events_path, local: true do |form| %>
+  
+  <%#= form.hidden_field :user_ids, @user, :id %>
+  <p>
+    <%= form.label :datetime %><br>
+    <%= form.datetime_field :datetime %>
+  </p>
+
+  <p>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
