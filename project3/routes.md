@@ -62,14 +62,14 @@
                           PATCH  /users/:id(.:format)                                                                     users#update
                           PUT    /users/:id(.:format)                                                                     users#update
                           DELETE /users/:id(.:format)                                                                     users#destroy
-   event_user_datum_index GET    /event_user_datum(.:format)                                                              event_user_datum#index
-                          POST   /event_user_datum(.:format)                                                              event_user_datum#create
-     new_event_user_datum GET    /event_user_datum/new(.:format)                                                          event_user_datum#new
-    edit_event_user_datum GET    /event_user_datum/:id/edit(.:format)                                                     event_user_datum#edit
-         event_user_datum GET    /event_user_datum/:id(.:format)                                                          event_user_datum#show
-                          PATCH  /event_user_datum/:id(.:format)                                                          event_user_datum#update
-                          PUT    /event_user_datum/:id(.:format)                                                          event_user_datum#update
-                          DELETE /event_user_datum/:id(.:format)                                                          event_user_datum#destroy
+        events_users_data GET    /events_users_data(.:format)                                                             events_users_data#index
+                          POST   /events_users_data(.:format)                                                             events_users_data#create
+   new_events_users_datum GET    /events_users_data/new(.:format)                                                         events_users_data#new
+  edit_events_users_datum GET    /events_users_data/:id/edit(.:format)                                                    events_users_data#edit
+       events_users_datum GET    /events_users_data/:id(.:format)                                                         events_users_data#show
+                          PATCH  /events_users_data/:id(.:format)                                                         events_users_data#update
+                          PUT    /events_users_data/:id(.:format)                                                         events_users_data#update
+                          DELETE /events_users_data/:id(.:format)                                                         events_users_data#destroy
                     rsvps GET    /rsvps(.:format)                                                                         rsvps#index
                           POST   /rsvps(.:format)                                                                         rsvps#create
                  new_rsvp GET    /rsvps/new(.:format)                                                                     rsvps#new
