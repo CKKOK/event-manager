@@ -16,6 +16,10 @@ class RsvpsController < ApplicationController
 
   # ../events/:event_id/rsvps/:id/delete - [logged in, owner] delete an invitation (or a bunch of invitations) then redirects to event page
 
+  # ../rsvps
+
+  # Template code to account for the above directions
+  # =================================================
   # case logged_in?
   # when true
   #   @event = Event.find_by_id(params[:event_id])
@@ -103,9 +107,9 @@ class RsvpsController < ApplicationController
 
     if !@user.nil?
       # the user role can be found by looking up user_event_data, event_id and user_id, get corresponding user_event_datum_id, and get the user_role field.
-      @user_event = UsersEvents.where(:user_id => params[:user_id], :event_id => params[:event_id])
-      @user_event_datum = UserEventDatum.find_by_id(@user_event[:user_event_datum_id])
-      @user_role = @user_event_datum[:user_role]
+      @event_user = EventsUsers.where(:user_id => params[:user_id], :event_id => params[:event_id])
+      @event_user_datum = EventUserDatum.find_by_id(@event_user[:event_user_datum_id])
+      @user_role = @event_user_datum[:user_role]
     end
 
     if @user.nil? || @user_role != 'organizer'
@@ -135,26 +139,26 @@ class RsvpsController < ApplicationController
   end
 
   def is_owner?(event, user)
-    @user_event = UsersEvents.where(:user_id => user[:id], :event_id => event[:id])
+    @event_user = EventsUsers.where(:user_id => user[:id], :event_id => event[:id])
 
-    if @user_event.nil?
+    if @event_user.nil?
       return false
     end
 
-    @user_event_datum = UserEventDatum.find_by_id(@user_event[:user_event_datum_id])
+    @event_user_datum = EventUserDatum.find_by_id(@event_user[:event_user_datum_id])
     @user_role = @user_event_datum[:user_role]
     @user_role == 'organizer'
   end
   
   def is_invited?(event, user)
-    @user_event = UsersEvents.where(:user_id => user[:id], :event_id => event[:id])
+    @event_user = EventsUsers.where(:user_id => user[:id], :event_id => event[:id])
 
-    if @user_event.nil?
+    if @event_user.nil?
       return false
     end
 
-    @user_event_datum = UserEventDatum.find_by_id(@user_event[:user_event_datum_id])
-    @user_role = @user_event_datum[:user_role]
+    @event_user_datum = EventUserDatum.find_by_id(@event_user[:event_user_datum_id])
+    @user_role = @event_user_datum[:user_role]
     @user_role == 'guest'
   end
 
