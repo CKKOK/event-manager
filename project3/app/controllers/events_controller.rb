@@ -4,16 +4,16 @@ class EventsController < ApplicationController
 
     def index
         if params[:user_id]
-            @user = User.find(params[:user_id])
-            @events = @user.events
+            @user = User.find(current_user.id)
+            @events = @user.events.all
         else
             # sign in
         end
     end
 
     def show
-        @event = Event.find(params[:id])
-        @user = @event.users[0].id
+        @user = User.find(current_user.id)
+        @event = @user.events.find(params[:id])
 
         #if params[:user_id].to_i != @event.user.id
             # error
@@ -26,6 +26,8 @@ class EventsController < ApplicationController
     end
 
     def edit
+        @user = User.find(current_user.id)
+        @event = @user.events.find(params[:id])
     end
 
     def create
@@ -38,9 +40,17 @@ class EventsController < ApplicationController
     end
 
     def update
+        @event = Event.find(params[:id])
+
+        @event.update(event_params)
+        redirect_to user_events_path(current_user.id)
     end
 
     def destroy
+        @event = Event.find(params[:id])
+        @event.destroy
+
+        redirect_to user_events_path(current_user.id)
     end
 
 private

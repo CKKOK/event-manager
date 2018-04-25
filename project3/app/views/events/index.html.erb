@@ -4,13 +4,20 @@
   <tr>
     <th>DateTime</th>
     <th>Title</th>
+    <th>Show</th>
     <th>Edit</th>
+    <th>Destroy</th>
   </tr>
   
   <% @events.each do |event| %>
   <tr>
     <td><%= event.datetime%></td>
     <td><%= event.title%></td>
+    <td><%= link_to 'Show', user_event_path(@user, event) %></td>
+    <td><%= link_to 'Edit', edit_user_event_path(@user, event) %></td>
+    <td><%= link_to 'Destroy', event_path(event),
+        method: :delete,
+        data: { confirm: 'Are you sure?' } %></td>
   </tr>
   <% end %>
 
