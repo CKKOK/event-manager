@@ -1,19 +1,19 @@
                    Prefix Verb   URI Pattern                                                                              Controller#Action
-         new_user_session GET    /users/sign_in(.:format)                                                                 users/sessions#new
-             user_session POST   /users/sign_in(.:format)                                                                 users/sessions#create
-     destroy_user_session DELETE /users/sign_out(.:format)                                                                users/sessions#destroy
-        new_user_password GET    /users/password/new(.:format)                                                            users/passwords#new
-       edit_user_password GET    /users/password/edit(.:format)                                                           users/passwords#edit
-            user_password PATCH  /users/password(.:format)                                                                users/passwords#update
-                          PUT    /users/password(.:format)                                                                users/passwords#update
-                          POST   /users/password(.:format)                                                                users/passwords#create
- cancel_user_registration GET    /users/cancel(.:format)                                                                  users/registrations#cancel
-    new_user_registration GET    /users/sign_up(.:format)                                                                 users/registrations#new
-   edit_user_registration GET    /users/edit(.:format)                                                                    users/registrations#edit
-        user_registration PATCH  /users(.:format)                                                                         users/registrations#update
-                          PUT    /users(.:format)                                                                         users/registrations#update
-                          DELETE /users(.:format)                                                                         users/registrations#destroy
-                          POST   /users(.:format)                                                                         users/registrations#create
+         new_user_session GET    /users/sign_in(.:format)                                                                 devise/sessions#new
+             user_session POST   /users/sign_in(.:format)                                                                 devise/sessions#create
+     destroy_user_session DELETE /users/sign_out(.:format)                                                                devise/sessions#destroy
+        new_user_password GET    /users/password/new(.:format)                                                            devise/passwords#new
+       edit_user_password GET    /users/password/edit(.:format)                                                           devise/passwords#edit
+            user_password PATCH  /users/password(.:format)                                                                devise/passwords#update
+                          PUT    /users/password(.:format)                                                                devise/passwords#update
+                          POST   /users/password(.:format)                                                                devise/passwords#create
+ cancel_user_registration GET    /users/cancel(.:format)                                                                  devise/registrations#cancel
+    new_user_registration GET    /users/sign_up(.:format)                                                                 devise/registrations#new
+   edit_user_registration GET    /users/edit(.:format)                                                                    devise/registrations#edit
+        user_registration PATCH  /users(.:format)                                                                         devise/registrations#update
+                          PUT    /users(.:format)                                                                         devise/registrations#update
+                          DELETE /users(.:format)                                                                         devise/registrations#destroy
+                          POST   /users(.:format)                                                                         devise/registrations#create
               event_rsvps GET    /events/:event_id/rsvps(.:format)                                                        rsvps#index
                           POST   /events/:event_id/rsvps(.:format)                                                        rsvps#create
            new_event_rsvp GET    /events/:event_id/rsvps/new(.:format)                                                    rsvps#new
@@ -62,12 +62,25 @@
                           PATCH  /users/:id(.:format)                                                                     users#update
                           PUT    /users/:id(.:format)                                                                     users#update
                           DELETE /users/:id(.:format)                                                                     users#destroy
-        users_events_data GET    /users_events_data(.:format)                                                             users_events_data#index
-                          POST   /users_events_data(.:format)                                                             users_events_data#create
-   new_users_events_datum GET    /users_events_data/new(.:format)                                                         users_events_data#new
-  edit_users_events_datum GET    /users_events_data/:id/edit(.:format)                                                    users_events_data#edit
-       users_events_datum GET    /users_events_data/:id(.:format)                                                         users_events_data#show
-                          PATCH  /users_events_data/:id(.:format)                                                         users_events_data#update
-                          PUT    /users_events_data/:id(.:format)                                                         users_events_data#update
-                          DELETE /users_events_data/:id(.:format)                                                         users_events_data#destroy
+   event_user_datum_index GET    /event_user_datum(.:format)                                                              event_user_datum#index
+                          POST   /event_user_datum(.:format)                                                              event_user_datum#create
+     new_event_user_datum GET    /event_user_datum/new(.:format)                                                          event_user_datum#new
+    edit_event_user_datum GET    /event_user_datum/:id/edit(.:format)                                                     event_user_datum#edit
+         event_user_datum GET    /event_user_datum/:id(.:format)                                                          event_user_datum#show
+                          PATCH  /event_user_datum/:id(.:format)                                                          event_user_datum#update
+                          PUT    /event_user_datum/:id(.:format)                                                          event_user_datum#update
+                          DELETE /event_user_datum/:id(.:format)                                                          event_user_datum#destroy
+                    rsvps GET    /rsvps(.:format)                                                                         rsvps#index
+                          POST   /rsvps(.:format)                                                                         rsvps#create
+                 new_rsvp GET    /rsvps/new(.:format)                                                                     rsvps#new
+                edit_rsvp GET    /rsvps/:id/edit(.:format)                                                                rsvps#edit
+                     rsvp GET    /rsvps/:id(.:format)                                                                     rsvps#show
+                          PATCH  /rsvps/:id(.:format)                                                                     rsvps#update
+                          PUT    /rsvps/:id(.:format)                                                                     rsvps#update
+                          DELETE /rsvps/:id(.:format)                                                                     rsvps#destroy
                      root GET    /                                                                                        home#index
+       rails_service_blob GET    /rails/active_storage/blobs/:signed_id/*filename(.:format)                               active_storage/blobs#show
+rails_blob_representation GET    /rails/active_storage/representations/:signed_blob_id/:variation_key/*filename(.:format) active_storage/representations#show
+       rails_disk_service GET    /rails/active_storage/disk/:encoded_key/*filename(.:format)                              active_storage/disk#show
+update_rails_disk_service PUT    /rails/active_storage/disk/:encoded_token(.:format)                                      active_storage/disk#update
+     rails_direct_uploads POST   /rails/active_storage/direct_uploads(.:format)                                           active_storage/direct_uploads#create

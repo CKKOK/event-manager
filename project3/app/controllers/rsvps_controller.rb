@@ -16,6 +16,10 @@ class RsvpsController < ApplicationController
 
   # ../events/:event_id/rsvps/:id/delete - [logged in, owner] delete an invitation (or a bunch of invitations) then redirects to event page
 
+  # ../rsvps
+
+  # Template code to account for the above directions
+  # =================================================
   # case logged_in?
   # when true
   #   @event = Event.find_by_id(params[:event_id])
