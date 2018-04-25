@@ -1,10 +1,95 @@
-<h1>Home</h1>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+ 
+  <a class="navbar-brand" href="#">
+    <img src="/assets/images/screenshot1.png" width="30" height="30" alt="Hi">
+  </a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        	<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About Us</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="wedding-grid-container">
+    <h1 class="display-4">The Wedding For You and Me</h1>
+    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+  </div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="wedding-grid-item1 col-sm-4">
+				<h1>Home</h1>
+
+				<form>
+				
+					  <div class="form-group">
+							    <label class="control-label" for="exampleInputEmail1">Email Address</label>
+							    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+							    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+					  </div>
+				  	
+				
+					  <div class="form-group">
+						    <label for="exampleInputPassword1">Password</label>
+						    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+					  </div>
+				
+					  <div class="form-group">
+						    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+						    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+					  </div>
+
+				  		<button type="submit" class="btn btn-outline-light">Sign Me In</button>
+
+				  	  <div class="form-group">
+				  	  		<form method="GET" action="users/new">
+				  	  			<button type="submit" class="btn btn-outline-light">Register Me</button>
+				  	  			<small id="emailHelp" class="form-text text-muted">Do not have an account? Just click on the button above!</small>
+				  	  		</form>
+				  	  </div>
+				</form>
+		</div>
+	</div>
+</div>
 
 <% if !user_signed_in? %>
-    <!-- Need to check for the presence of a token here for guest user -->
-    <%= link_to 'Sign in', new_user_session_path %><br>
-    <%= link_to 'Register', new_user_registration_path %>
-<% else %>
-    <h2>Hello there <%= current_user.name %></h2>
-    <%= link_to 'log out', destroy_user_session_path, method: :delete %>
-<% end %>
+     <!-- Need to check for the presence of a token here for guest user -->
+     <%= link_to 'Sign in', new_user_session_path %><br>
+     <%= link_to 'Register', new_user_registration_path %>
+ <% else %>
+     <h2>Hello there <%= current_user.name %></h2>
+     <%= link_to 'log out', destroy_user_session_path, method: :delete %>
+ <% end %>
+
+<footer class="footer">
+	<div class="container">
+		<span class="text-muted">Place stick footer content here.</span>
+	</div>
+</footer>

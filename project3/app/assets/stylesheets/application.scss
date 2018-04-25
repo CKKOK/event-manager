@@ -10,6 +10,19 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
  */
+ @import "bootstrap";
+ @import "variables";
+ @import "base";
+ @import "home";
+
+body {
+	background-image: asset-url('anne-edgar-119384-unsplash.jpg');
+}
+
+image {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}

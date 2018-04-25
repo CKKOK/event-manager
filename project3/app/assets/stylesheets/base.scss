@@ -1,0 +1,25 @@
+body{
+	background-color:$background-color;
+	font-family:$main-font-family;
+}
+
+.wedding-grid-container {
+	text-align: center;
+}
+
+.wedding-grid-item1 {
+	text-align: center;
+	align-items: center;
+	justify-content-center: form-line;
+	margin: 0 auto;
+	color: white;
+}
+
+.navbar-nav{
+	text-align: center;
+	top: 0;
+}
+
+button {
+	margin: 15px 15px 15px 15px;
+}
