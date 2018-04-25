@@ -15,7 +15,7 @@ EventsUsers.destroy_all
 EventUserDatum.destroy_all
 
 user = User.new(
-  name: "Bojack Horseman",
+  username: "Bojack Horseman",
   email: "abc@123.com", 
   password: "123456", 
   password_confirmation: "123456"
@@ -26,7 +26,7 @@ event = Event.create(title: "The Distracted Globe", datetime: Time.now.to_dateti
 
 rsvp_1 = Rsvp.create(
   event_id: event.id,
-  name: user.name,
+  name: user.username,
   email: user.email,
   key: ""
 )
