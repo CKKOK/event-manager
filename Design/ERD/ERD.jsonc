@@ -1,77 +1,53 @@
 // Format
-entityName = {
-    fieldName: fieldType
-    ...
-}
+{
+    "table_name": "entity_name"
+    "field_name": "field_type"
+},
 
 // Relationship Specification
-entityName--(type)--entityName
-where type = 1-1, 1-M, M-1, or M-M
+// entityName--(type)--entityName
+// where type = 1-1, 1-M, M-1, or M-M
 
 //====================================================
-User = {
-    name: text,
-    email: email,
-    password: text
-}
-
-events = {
-    title: text,
-    date_time: dateTime
-}
-
-users_events = {
-    event: foreign_key,
-    user: foreign_key,
-    userEventData: foreign_key
-}
-
-users_events_data = {
-    relation: text,
-    user_role: organizer / guest,
-    attending: boolean,
-    diet: normal / halal / vegetarian, ???
-    additional_persons: integer (non-negative),
-    num_babies: integer (non-negative), 
-    num_toddlers: integer (non-negative),
-    require_carpark: boolean,
-    attended: boolean
-}
-
+{
+    "table_name":    "users",
+    "name":         "text",
+    "email":        "email",
+    "password":     "text"
+},
+{
+    "table_name":    "events",
+    "title":        "text",
+    "date_time":    "dateTime"
+},
+{
+    "table_name":        "users_events",
+    "event":            "foreign_key",
+    "user":             "foreign_key",
+    "user_event_data":    "foreign_key"
+},
+{
+    "table_name":            "users_events_data",
+    "relation":             "text",
+    "user_role":            "organizer / guest",
+    "attending":            "boolean",
+    "diet":                 "normal / halal / vegetarian, ???",
+    "additional_persons":   "integer (non-negative)",
+    "num_babies":           "integer (non-negative)", 
+    "num_toddlers":         "integer (non-negative)",
+    "require_carpark":      "boolean",
+    "attended":             "boolean"
+},
 rsvp_lists = {
-    event: id,
-    name: text,
-    email: email,
-    key: text (hash of email + event)
+    "table_name":    "rsvps",
+    "event":        "foreign_key",
+    "name":         "text",
+    "email":        "email",
+    "key":          "text (hash of email + event)"
 }
-
-users--M-M--events,
-events--1-M--users_events_data,
-events--1-1--rsvp_lists,
-
-
-
-
-
-
-
-
-
-
-
-
-
-//=========================================================
-guest = {
-    name: text,
-    relation: text, //whose side, bride or groom?
-    attending: boolean,
-    message: text,
-    diet: normal, halal, vegetarian, ???
-    additionalPersons: integers (non-negative),
-    numBabies: integer,
-    numToddlers: integer,
-    requireCarpark: boolean,
-    attended: boolean
-}
+// Relations
+// =========
+// users--M-M--events,
+// events--1-M--users_events_data,
+// events--1-M--rsvps,
 
