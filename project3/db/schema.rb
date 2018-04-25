@@ -22,14 +22,14 @@ ActiveRecord::Schema.define(version: 2018_04_23_065510) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "rsvp_lists", force: :cascade do |t|
+  create_table "rsvps", force: :cascade do |t|
     t.bigint "event_id"
     t.string "name"
     t.text "email"
     t.text "key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_rsvp_lists_on_event_id"
+    t.index ["event_id"], name: "index_rsvps_on_event_id"
   end
 
   create_table "user_event_data", force: :cascade do |t|
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2018_04_23_065510) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "name", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -59,7 +60,6 @@ ActiveRecord::Schema.define(version: 2018_04_23_065510) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 2018_04_23_065510) do
     t.index ["user_id"], name: "index_users_events_on_user_id"
   end
 
-  add_foreign_key "rsvp_lists", "events"
+  add_foreign_key "rsvps", "events"
   add_foreign_key "users_events", "events"
   add_foreign_key "users_events", "user_event_data"
   add_foreign_key "users_events", "users"

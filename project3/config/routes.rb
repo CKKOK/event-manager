@@ -9,13 +9,16 @@ Rails.application.routes.draw do
     unlocks: 'users/unlocks',
     omniauth: 'users/omniauth'
   }
-
+  
   resources :events do
+    resources :rsvps
     resources :users
   end
 
   resources :users do
-    resources :events
+    resources :events do
+      resources :rsvps
+    end
   end
 
   resources :users_events_data

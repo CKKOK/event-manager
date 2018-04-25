@@ -1,3 +1,0 @@
-class RsvpList < ApplicationRecord
-  belongs_to :event
-end
