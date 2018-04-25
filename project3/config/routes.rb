@@ -1,15 +1,16 @@
 Rails.application.routes.draw do
+  devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  devise_for :users, controllers: {
-    sessions: 'users/sessions',
-    registrations: 'users/registrations',
-    passwords: 'users/passwords',
-    confirmations: 'users/confirmations',
-    unlocks: 'users/unlocks',
-    omniauth: 'users/omniauth'
-  }
-  
+  #devise_for :users, controllers: {
+    #sessions: 'users/sessions',
+    #registrations: 'users/registrations',
+    #passwords: 'users/passwords',
+    #confirmations: 'users/confirmations',
+    #unlocks: 'users/unlocks',
+    #omniauth: 'users/omniauth'
+  #}
+
   resources :events do
     resources :rsvps
     resources :users
@@ -21,7 +22,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users_events_data
+  resources :user_event_datum
+  resources :rsvp_lists
 
   root "home#index"
 

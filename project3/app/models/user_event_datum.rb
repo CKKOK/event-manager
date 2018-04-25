@@ -1,3 +1,3 @@
 class UserEventDatum < ApplicationRecord
-    belongs_to :users_events
+    belongs_to :event
 end
