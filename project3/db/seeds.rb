@@ -11,8 +11,8 @@ require 'date'
 User.destroy_all
 Event.destroy_all
 Rsvp.destroy_all
-UsersEvents.destroy_all
-UserEventDatum.destroy_all
+EventsUsers.destroy_all
+EventUserDatum.destroy_all
 
 user = User.new(
   name: "Bojack Horseman",
@@ -22,7 +22,7 @@ user = User.new(
 )
 user.save!
 
-event = Event.create(title: "The Distracted Globe", date_time: Time.now.to_datetime)
+event = Event.create(title: "The Distracted Globe", datetime: Time.now.to_datetime)
 
 rsvp_1 = Rsvp.create(
   event_id: event.id,
@@ -42,6 +42,6 @@ rsvp_2 = Rsvp.create(
   key: key
 )
 
-# userevent = UsersEvents.create()
+# eventuser = EventsUsers.create()
 
-# usereventdata = UserEventDatum.create()
+# eventuserdata = EventUserDatum.create()

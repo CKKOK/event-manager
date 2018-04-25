@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class UsersEventsDataController < ApplicationController
+class EventsUsersDataController < ApplicationController
   def index
     # this should never be accessed.
   end
