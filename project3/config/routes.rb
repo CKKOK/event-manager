@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :event_user_datum
+  resources :events_users_data
   resources :rsvps
 
   root "home#index"
