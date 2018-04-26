@@ -1,7 +1,23 @@
-<h1>RSVP Index</h1>
-<h1><%= @user_role %></h1>
 <% if @user_role == :owner %>
-    <% @rsvps.each do |rsvp| %>
-        <%= rsvp.name %>, <%= rsvp.email %> <br>
-    <% end %>
+    <h1>All RSVPs for <%= @event.title %></h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Attending</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @rsvps.each do |rsvp| %>
+                <tr>
+                    <td><%= rsvp.name %></td>
+                    <td><%= rsvp.email %></td>
+                    <td><%= rsvp.event_user_datum.user_role %></td>
+                    <td><%= rsvp.event_user_datum.attending %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
 <% end %>

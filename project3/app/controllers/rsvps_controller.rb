@@ -118,7 +118,7 @@ class RsvpsController < ApplicationController
               redirect_to root_path
               return
             else # ___KEY IS VALID (i.e. USER DOES NOT EXIST IN SYSTEM YET)
-              redirect_to edit_rsvp_path(@rsvp, key: params[:key])
+              redirect_to edit_rsvp_path(@rsvp, key: params[:key], attending: params[:attending])
               return
             end
           end
@@ -132,11 +132,12 @@ class RsvpsController < ApplicationController
         case is_owner?(@event, current_user)
           when true # ___IS OWNER
             @rsvp = Rsvp.find_by_id(params[:id])
+            @event_user_datum = @rsvp.event_user_datum
             @user_role = :owner
           when false
             if is_invited?(@event, current_user) # ___IS GUEST
               @rsvp = Rsvp.find_by_id(params[:id])
-              if @rsvp[:email] == current_user[:email]
+              if @rsvp[:email] == current_user[:email] # Check that the rsvp is indeed for the user
                 @user_role = :guest
               else
                 flash[:notice] = 'That invitation is not for you!'
@@ -173,7 +174,7 @@ class RsvpsController < ApplicationController
 
   def create
     rsvps = params[:rsvp].values.reject do |rsvp|
-      rsvp.values.all? &:blank?
+      rsvp.values.any? &:blank?
     end
     rsvps.each { |rsvp| 
       if user_email_exists?(rsvp[:email]) 
@@ -181,15 +182,19 @@ class RsvpsController < ApplicationController
         user = User.find_by_email(rsvp[:email])
         tmp = Rsvp.create! rsvp
         tmp.user = user
+        tmp_event_user_datum = tmp.create_event_user_datum(user_role: :guest)
+        tmp_event_user_datum.save
       else
         tmpstring = rsvp[:email] + rsvp[:event_id].to_s
         rsvp[:key] = BCrypt::Password.create(tmpstring).to_s
         tmp = Rsvp.create! rsvp
+        tmp_event_user_datum = tmp.create_event_user_datum(user_role: :guest)
+        tmp_event_user_datum.save
       end
-      RsvpMailer.with(sender: current_user.username, rsvp: tmp).rsvp_email.deliver_now
+      RsvpMailer.with(sender: current_user.username, rsvp: tmp).rsvp_email.deliver_later
     }
     if rsvps.length > 0
-      flash[:notice] = "Created #{pluralize rsvps.length, 'invitations'}"
+      flash[:notice] = "Created #{rsvps.length} #{'invitation'.pluralize(rsvps.length)}"
     end
     redirect_to root_path
     return
@@ -206,8 +211,8 @@ class RsvpsController < ApplicationController
           when false
             if is_invited?(@event, current_user) # ___IS GUEST
               @user_role = :guest
-              @rsvp = Rsvp.where(:event_id => @event[:id], :email => current_user[:email])
-              # Should get the event user data here
+              @rsvp = @event.rsvps.where(:email => current_user[:email]).first
+              @event_user_datum = @rsvp.event_user_datum
             else # ___IS NEITHER OWNER NOR GUEST
               redirect_to user_events_path(current_user)
               return
@@ -224,7 +229,8 @@ class RsvpsController < ApplicationController
               return
             else # ___KEY IS VALID (i.e. USER DOES NOT EXIST IN SYSTEM YET)
               @user_role = :guest
-              # Should get the event user data here
+              @owner = @rsvp.event.rsvps.where(event_user_datum: EventUserDatum.where(user_role: 'owner')).first.name
+              @event_user_datum = @rsvp.event_user_datum
             end
           end
       end

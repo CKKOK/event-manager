@@ -35,7 +35,9 @@ rsvp_1.user = user
 rsvp_1.save
 
 
-event_user_datum_1 = rsvp_1.create_event_user_datum()
+event_user_datum_1 = rsvp_1.create_event_user_datum(
+  user_role: "owner"
+)
 event_user_datum_1.save!
 
 name = "Princess Caroline"
@@ -50,5 +52,7 @@ rsvp_2 = Rsvp.new(
 )
 rsvp_2.save
 
-event_user_datum_2 = rsvp_2.create_event_user_datum()
+event_user_datum_2 = rsvp_2.create_event_user_datum(
+  user_role: "guest"
+)
 event_user_datum_2.save
