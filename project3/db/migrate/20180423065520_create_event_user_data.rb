@@ -1,7 +1,7 @@
 class CreateEventUserData < ActiveRecord::Migration[5.2]
   def change
     create_table :event_user_data do |t|
-      t.references :event, foreign_key: true
+      t.references :rsvp, foreign_key: true
       t.text :relation
       t.text :user_role
       t.boolean :attending

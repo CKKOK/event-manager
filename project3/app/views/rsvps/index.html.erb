@@ -1,2 +1,7 @@
 <h1>RSVP Index</h1>
-<h1>You should not see this</h1>
+<h1><%= @user_role %></h1>
+<% if @user_role == :owner %>
+    <% @rsvps.each do |rsvp| %>
+        <%= rsvp.name %>, <%= rsvp.email %> <br>
+    <% end %>
+<% end %>

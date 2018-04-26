@@ -1,2 +1,8 @@
 <h1>RSVP Edit Form</h1>
 <h1>Form goes here, prepopulated</h1>
+<h1><%= @user_role %></h1>
+<% if @user_role == :owner %>
+    <%= @rsvps %>
+<% elsif @user_role == :guest %>
+    <%= @rsvp %>
+<% end %>

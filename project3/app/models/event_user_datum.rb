@@ -1,3 +1,3 @@
 class EventUserDatum < ApplicationRecord
-    belongs_to :event
+    belongs_to :rsvp
 end

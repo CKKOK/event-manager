@@ -24,24 +24,31 @@ user.save!
 
 event = Event.create(title: "The Distracted Globe", datetime: Time.now.to_datetime)
 
+event.users << user
+
 rsvp_1 = Rsvp.create(
   event_id: event.id,
   name: user.username,
-  email: user.email,
-  key: ""
+  email: user.email
 )
+rsvp_1.user = user
+rsvp_1.save
+
+
+event_user_datum_1 = rsvp_1.create_event_user_datum()
+event_user_datum_1.save!
 
 name = "Princess Caroline"
 email = "mmm@meow.com"
-key = BCrypt::Password.create(name << email)
+key = BCrypt::Password.create(name + email)
 
-rsvp_2 = Rsvp.create(
+rsvp_2 = Rsvp.new(
   event_id: event.id,
   name: name,
   email: email,
   key: key
 )
+rsvp_2.save
 
-# eventuser = EventsUsers.create()
-
-# eventuserdata = EventUserDatum.create()
+event_user_datum_2 = rsvp_2.create_event_user_datum()
+event_user_datum_2.save

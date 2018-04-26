@@ -1,168 +1,285 @@
 # frozen_string_literal: true
 
-require 'bcrypt'
+# Specifications
+# ==============
+# Rsvps have :event_id, :event_user_datum_id (pending), :name, :email, and :key
+# :key is nil for users with an account
+
+# Notes
+# =====
+# We use find_by_??? here so that a nil result can be returned instead of having Rails throw an error.
+# To find a user by email: User.find_by_email(rsvp[:email])
+# To find an event: Event.find_by_id(rsvp[:event_id])
+# To find an event user datum: EventUserDatum.find_by_id(rsvp[:event_user_datum_id])
+
+# Flow Control
+# ============
+# ../events/:event_id/rsvps
+# [logged in, owner] rsvp list associated with the event
+# [logged in, guest] redirect to rsvp if exists or root otherwise
+# [not logged in, key] redirect to new/edit rsvp if key is valid or root otherwise
+# [not logged in, no key] redirect to root
+
+# ../events/:event_id/rsvps/:id
+# [logged in, owner] show that particular rsvp response
+# [logged in, guest] if not his own rsvp, redirect to his own rsvp if exists or root otherwise
+# [not logged in, key or no key] redirect to root
+
+# ../events/:event_id/rsvps/new
+# [logged in, owner] form for creating new rsvps for event
+# [logged in, guest] [not logged in] redirect to user_events (for guest) or root (otherwise)
+
+# ../events/:event_id/rsvps/:id/edit
+# [logged in, owner] edit the rsvp list
+# [logged in, guest] edit his own response if rsvp belongs to him or redirect to root otherwise
+# [not logged in, key] edit response
+# [not logged in] redirect to root
+
+# ../events/:event_id/rsvps/:id/update
+# update a single invitation. AJAX call? (remote: true)
+
+# ../events/:event_id/rsvps/:id/delete
+# delete a single invitation. AJAX call? (remote: true)
+
+# ../rsvps
+
+# Q&A
+# ===
+# Question: What if the user signs up while having outstanding RSVPs?
+# Proposal: Nothing. The check for RSVPs is done via email.
+
+# Template code to account for the above directions
+# =================================================
+# case logged_in?
+#   when true # ___LOGGED IN
+#     @event = Event.find_by_id(params[:event_id])
+#     case is_owner?(@event, current_user)
+#       when true # ___IS OWNER
+#         DO OWNER STUFF
+#       when false
+#         if is_invited?(@event, current_user) # ___IS GUEST
+#           DO GUEST STUFF
+#         else # ___IS NEITHER OWNER NOR GUEST
+#           DO BAD STUFF
+#         end
+#       end
+#   when false # ___NOT LOGGED IN
+#     case key.nil?
+#       when true # ___HAS NO KEY
+#         DO BAD STUFF
+#       when false # ___HAS KEY
+#         @rsvp = Rsvp.find_by_key(params[:key])
+#         if @rsvp.nil? # ___KEY IS INVALID
+#           DO BAD STUFF
+#         else # ___KEY IS VALID (i.e. USER DOES NOT EXIST IN SYSTEM YET)
+#           DO STUFF
+#         end
+#       end
+#   end
+
+require 'bcrypt' # For encrypting the email + event_id for users without accounts
 
 class RsvpsController < ApplicationController
-  # Rsvps have :event_id :name :email :key
-  # Check for the user by doing User.find_by_email(rsvp[:email])
-
-  # ../events/:event_id/rsvps - [logged in, owner] rsvp list associated with the event, [logged in, guest] redirect to rsvp if exists or root otherwise, [not logged in, key] redirect to new/edit rsvp if key is valid or root otherwise, [not logged in, no key] redirect to root
-
-  # ../events/:event_id/rsvps/:id - [logged in, owner] show the rsvp response, [logged in, guest] if not his own rsvp, redirect to his own rsvp if exists or root otherwise, [not logged in, key] redirect to rsvp, [not logged in, no key] redirect to root
-
-  # ../events/:event_id/rsvps/new - [logged in, owner] form for creating new rsvp list for event, [logged in, guest] [not logged in] redirect to rsvp if exists or root otherwise
-
-  # ../events/:event_id/rsvps/:id/edit - [logged in, owner] edit the rsvp list, [logged in, guest] edit his own response if rsvp belongs to him or redirect to root otherwise, [not logged in, key] edit response, [not logged in, no key] redirect to root
-
-  # ../events/:event_id/rsvps/:id/delete - [logged in, owner] delete an invitation (or a bunch of invitations) then redirects to event page
-
-  # ../rsvps
-
-  # Template code to account for the above directions
-  # =================================================
-  # case logged_in?
-  # when true
-  #   @event = Event.find_by_id(params[:event_id])
-  #   case is_owner?(@event, current_user)
-  #   when true
-  #     @rsvps = Rsvp.where(:event_id => @event[:id])
-  #   when false
-  #     if is_invited?(@event, current_user)
-  #       @rsvp = Rsvp.where(:event_id => @event[:id], :email => current_user[:email])
-  #       redirect_to edit_user_event_rsvp_path(current_user, @event, @rsvp)
-  #     else
-  #       redirect_to user_events_path(current_user)
-  #     end
-  #   end
-  # when false
-  #   case key.nil?
-  #   when true
-  #     redirect_to root_path
-  #   when false
-  #     @event = Event.find_by_id(params[:event_id])
-  #     @rsvp = Rsvp.find_by_key(params[:key])
-  #     if @rsvp.nil?
-  #       redirect_to root_path
-  #     else
-  #       redirect_to edit_event_rsvp_path(@event, @rsvp)
-  #     end
-  #   end
-  # end
 
   def index
-    # event/:event_id/rsvps
-    # RSVP can be obtained from rsvp.where(event_id: :event_id)
-    # Event can always be obtained from :event_id as the rsvp_list is a sub-resource of event. However, we need to check if there is a :user_id present. Because if there is, is he attempting to create/edit a rsvp list? Or is he attempting to rsvp to an event?
-    @rsvp = Rsvp.find_by_key(params[:key])
+    case logged_in?
+      when true # ___LOGGED IN
+        @event = Event.find_by_id(params[:event_id]) 
 
-    # if the rsvp does not exist, we check for the presence of a user. if the user does not exist, redirect to the homepage, else redirect to the user's dashboard.
-    # if the rsvp exists and the user arrived via a key, he is not a pre-existing user of the system. Then, get the event_id from the rsvp object and direct him to the edit_event_rsvp_path.
-    # if the rsvp exists and the user did not arrive via a key, he is a system user. Get the event_id from the rsvp object, then redirect him to the edit_user_event_rsvp_path. Let the edit_user_event_rsvp controller decide whether to render the edit rsvp or reply rsvp form.
+        if @event.nil?
+          redirect_to user_events_path(current_user)
+          return
+        end
 
-    if @rsvp.nil?
-      if current_user.nil?
-        redirect_to root_path
-      else
-        redirect_to user_events_path(current_user)
+        case is_owner?(@event, current_user)
+          when true # ___IS OWNER
+            @user_role = :owner
+            @rsvps = @event.rsvps
+          when false
+            if is_invited?(@event, current_user) # ___IS GUEST
+              @rsvp = @event.rsvps.find_by_email(current_user.email)
+              redirect_to edit_user_event_rsvp_path(current_user, @event, @rsvp)
+              return
+            else # ___IS NEITHER OWNER NOR GUEST
+              redirect_to user_events_path(current_user)
+              return
+            end
+          end
+
+      when false # ___NOT LOGGED IN
+
+        case key.nil?
+          when true # ___HAS NO KEY
+            redirect_to root_path
+            return
+          when false # ___HAS KEY
+            @rsvp = Rsvp.find_by_key(params[:key])
+            if @rsvp.nil? # ___KEY IS INVALID
+              redirect_to root_path
+              return
+            else # ___KEY IS VALID (i.e. USER DOES NOT EXIST IN SYSTEM YET)
+              redirect_to edit_rsvp_path(@rsvp, key: params[:key])
+              return
+            end
+          end
       end
-    else
-      @event = Event.find_by_id(@rsvp[:event_id])
-      if current_user.nil?
-        redirect_to edit_event_rsvp_path(@event, @rsvp)
-      else
-        redirect_to edit_user_event_rsvp_path(current_user, @event, @rsvp)
-      end
-    end
   end
 
   def show
-    # This should show the rsvps for a particular event
-    @rsvps = Rsvp.where(:event_id => params[:event_id])
-    render :json => @rsvps
+    case logged_in?
+      when true # ___LOGGED IN
+        @event = Event.find_by_id(params[:event_id])
+        case is_owner?(@event, current_user)
+          when true # ___IS OWNER
+            @rsvp = Rsvp.find_by_id(params[:id])
+            @user_role = :owner
+          when false
+            if is_invited?(@event, current_user) # ___IS GUEST
+              @rsvp = Rsvp.find_by_id(params[:id])
+              if @rsvp[:email] == current_user[:email]
+                @user_role = :guest
+              else
+                flash[:notice] = 'That invitation is not for you!'
+                redirect_to user_events_path(current_user)
+                return
+              end
+            else # ___IS NEITHER OWNER NOR GUEST
+              flash[:notice] = 'Sorry but you weren\'t invited to that event!'
+              redirect_to user_events_path(current_user)
+              return
+            end
+          end
+      when false # ___NOT LOGGED IN
+        redirect_to root_path
+        return
+      end
   end
 
   def new
-    @rsvp_list = Rsvp.new
+    case logged_in?
+      when true # ___LOGGED IN
+        @event = Event.find_by_id(params[:event_id])
+        case is_owner?(@event, current_user)
+          when true # ___IS OWNER
+          when false
+            redirect_to user_events_path(current_user)
+            return
+          end
+      when false # ___NOT LOGGED IN
+        redirect_to root_path
+        return
+      end
   end
 
   def create
-    # This is going to need to create a tonne of stuff from the form data, i.e. each line on the form corresponds to one row in the rsvps database
-    # Bcrypt the email address and event_id by doing BCrypt::Password.new(email_address << :event_id)
-    # event_id = params[:event_id]
-    # key = BCrypt::Password.new(email_address << event_id.to_s)
+    rsvps = params[:rsvp].values.reject do |rsvp|
+      rsvp.values.all? &:blank?
+    end
+    rsvps.each { |rsvp| 
+      if user_email_exists?(rsvp[:email]) 
+        rsvp[:key] = nil
+        user = User.find_by_email(rsvp[:email])
+        tmp = Rsvp.create! rsvp
+        tmp.user = user
+      else
+        tmpstring = rsvp[:email] + rsvp[:event_id].to_s
+        rsvp[:key] = BCrypt::Password.create(tmpstring).to_s
+        tmp = Rsvp.create! rsvp
+      end
+      RsvpMailer.with(sender: current_user.username, rsvp: tmp).rsvp_email.deliver_now
+    }
+    if rsvps.length > 0
+      flash[:notice] = "Created #{pluralize rsvps.length, 'invitations'}"
+    end
+    redirect_to root_path
+    return
   end
 
   def edit
-    # if there is no user, he is assumed to be replying to an invitation.
-    # if there is one, and he is the event's owner, he is assumed to be editing the invite list.
-    # otherwise, he is assumed to be replying to an invitation.
-    @rsvp = Rsvp.find_by_id(params[:id])
-    @event = Event.find_by_id(params[:event_id])
-    @user = User.find_by_email(@rsvp[:email]) if !@rsvp.nil?
-    
-    if @rsvp.nil? || @event.nil?
-      puts "Invalid rsvp or event id"
-      return
-    end
-
-    if !@user.nil?
-      # the user role can be found by looking up user_event_data, event_id and user_id, get corresponding user_event_datum_id, and get the user_role field.
-      @event_user = EventsUsers.where(:user_id => params[:user_id], :event_id => params[:event_id])
-      @event_user_datum = EventUserDatum.find_by_id(@event_user[:event_user_datum_id])
-      @user_role = @event_user_datum[:user_role]
-    end
-
-    if @user.nil? || @user_role != 'organizer'
-      puts "Either user not specified, or he is a guest"
-    else
-      puts "User is an organizer"
-    end
+    case logged_in?
+      when true # ___LOGGED IN
+        @event = Event.find_by_id(params[:event_id])
+        case is_owner?(@event, current_user)
+          when true # ___IS OWNER
+            @user_role = :owner
+            @rsvps = Rsvp.where(:event_id => @event[:id])
+          when false
+            if is_invited?(@event, current_user) # ___IS GUEST
+              @user_role = :guest
+              @rsvp = Rsvp.where(:event_id => @event[:id], :email => current_user[:email])
+              # Should get the event user data here
+            else # ___IS NEITHER OWNER NOR GUEST
+              redirect_to user_events_path(current_user)
+              return
+            end
+          end
+      when false # ___NOT LOGGED IN
+        case key.nil?
+          when true # ___HAS NO KEY
+            redirect_to root_path
+          when false # ___HAS KEY
+            @rsvp = Rsvp.find_by_key(params[:key])
+            if @rsvp.nil? # ___KEY IS INVALID
+              redirect_to root_path
+              return
+            else # ___KEY IS VALID (i.e. USER DOES NOT EXIST IN SYSTEM YET)
+              @user_role = :guest
+              # Should get the event user data here
+            end
+          end
+      end
   end
 
-  def update; end
+  def update
+    # Updates only a single record. Deal with this via AJAX?
+    @rsvp = Rsvp.find(params[:id])
+    if user_email_exists?(params[:email])
+      params[:key] = nil
+      # send email out
+    else
+      params[:key] = BCrypt::Password.new(params[:email] << params[:event_id].to_s)
+      # send email out
+    end
+    @rsvp.update(name: params[:name], email: params[:email], key: params[:key])
+    # redirect_to root_path
+  end
 
-  def destroy; end
-
-  def reply
-    # event/:event_id/rsvp_list/:id/reply
-    # RsvpList can be obtained from rsvp_list.where(event_id: :event_id)
-    # Event can be obtained from :event_id.
-    # User has to be inferred from the email, i.e. user = user.find_by(:email, )
-    # This one should redirect to the appropriate users_events_data
-    # Bcrypt the email address and event_id by doing BCrypt::Password.new(email_address << :event_id)
+  def destroy
+    # Deletes a single record. Deal with this via AJAX?
+    @rsvp = Rsvp.find(params[:id])
+    @rsvp.destroy
+    # redirect_to root_path
   end
 
   private
 
+  def user_email_exists?(email)
+    User.where(:email => email).exists?
+  end
+
   def logged_in?
-    !params[:user_id].nil? || !current_user.nil?
+    !current_user.nil?
   end
 
   def is_owner?(event, user)
-    @event_user = EventsUsers.where(:user_id => user[:id], :event_id => event[:id])
-
-    if @event_user.nil?
+    if event.nil? || user.nil?
       return false
     end
-
-    @event_user_datum = EventUserDatum.find_by_id(@event_user[:event_user_datum_id])
-    @user_role = @user_event_datum[:user_role]
-    @user_role == 'organizer'
+    event.users.where(rsvps: EventUserDatum.where(user_role: "owner")).first == user
   end
   
   def is_invited?(event, user)
-    @event_user = EventsUsers.where(:user_id => user[:id], :event_id => event[:id])
-
-    if @event_user.nil?
+    if event.nil? || user.nil?
       return false
     end
-
-    @event_user_datum = EventUserDatum.find_by_id(@event_user[:event_user_datum_id])
-    @user_role = @event_user_datum[:user_role]
-    @user_role == 'guest'
+    event.users.where(rsvps: EventUserDatum.where(user_role: "guest")).first == user
   end
 
   def key
     params[:key]
+  end
+
+  def rsvp_params
+    params.require(:rsvp).permit(:event_id, :name, :email)
   end
 end
