@@ -9,9 +9,9 @@
         <th>Destroy</th>
     </tr>
 
-    <% @rsvp_lists.each do |rsvplist| %>
+    <% @rsvp_lists.each.with_index(1) do |rsvplist, index| %>
     <tr>
-        <td><%= rsvplist.id %></td>
+        <td><%= index %></td>
         <td><%= rsvplist.name %></td>
         <td><%= rsvplist.email %></td>
         <td><%#= link_to 'Edit', edit_user_event_path(@user, event) %></td>
