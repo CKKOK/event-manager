@@ -174,7 +174,7 @@ class RsvpsController < ApplicationController
 
   def create
     rsvps = params[:rsvp].values.reject do |rsvp|
-      rsvp.values.all? &:blank?
+      rsvp.values.any? &:blank?
     end
     rsvps.each { |rsvp| 
       if user_email_exists?(rsvp[:email]) 
@@ -191,10 +191,10 @@ class RsvpsController < ApplicationController
         tmp_event_user_datum = tmp.create_event_user_datum(user_role: :guest)
         tmp_event_user_datum.save
       end
-      RsvpMailer.with(sender: current_user.username, rsvp: tmp).rsvp_email.deliver_now
+      RsvpMailer.with(sender: current_user.username, rsvp: tmp).rsvp_email.deliver_later
     }
     if rsvps.length > 0
-      flash[:notice] = "Created #{rsvps.length} #{'invitations'.pluralize(rsvps.length)}"
+      flash[:notice] = "Created #{rsvps.length} #{'invitation'.pluralize(rsvps.length)}"
     end
     redirect_to root_path
     return

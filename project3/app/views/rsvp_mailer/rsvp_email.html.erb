@@ -9,10 +9,10 @@
         You've been invited to <%= @rsvp.event.title %> by <%= @sender %>.
     </p>
     <p>
-        If you'd like to attend, please RSVP at <%= @url_yes %>.
+        If you'd like to attend, please RSVP <a href="<%= @url_yes %>">here</a>.
     </p>
     <p>
-        Otherwise, you could indicate so and leave a message for <%= @rsvp[:name] %> at <%= @url_no %>.
+        Otherwise, you could indicate so and leave a message for <%= @rsvp[:name] %> over <a href="<%= @url_no %>">here</a>.
     </p>
     <p>
         Have a nice day!

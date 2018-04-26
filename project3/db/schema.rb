@@ -19,12 +19,13 @@ ActiveRecord::Schema.define(version: 2018_04_23_065520) do
     t.bigint "rsvp_id"
     t.text "relation"
     t.text "user_role"
-    t.boolean "attending"
+    t.text "attending"
     t.text "diet"
     t.integer "additional_persons"
     t.integer "num_babies"
     t.integer "num_toddlers"
-    t.boolean "require_carpark"
+    t.text "require_carpark"
+    t.text "message"
     t.boolean "attended"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
