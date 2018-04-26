@@ -2,7 +2,6 @@
 
 <%= form_with scope: :event, url: events_path, local: true do |form| %>
   
-  <%#= form.hidden_field :user_ids, @user, :id %>
   <p>
     <%= form.label :datetime %><br>
     <%= form.datetime_field :datetime %>

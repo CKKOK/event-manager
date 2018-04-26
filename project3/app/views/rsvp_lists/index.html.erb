@@ -1,0 +1,28 @@
+<h1>RSVP List</h1>
+
+<table border="solid">
+    <tr>
+        <th>No</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Edit</th>
+        <th>Destroy</th>
+    </tr>
+
+    <% @rsvp_lists.each do |rsvplist| %>
+    <tr>
+        <td><%= rsvplist.id %></td>
+        <td><%= rsvplist.name %></td>
+        <td><%= rsvplist.email %></td>
+        <td><%#= link_to 'Edit', edit_user_event_path(@user, event) %></td>
+        <td><%#= link_to 'Destroy', event_path(event),
+            method: :delete,
+            data: { confirm: 'Are you sure?' } %>
+        </td>
+    </tr>
+    <% end %>
+
+</table>
+
+<%= link_to 'Add', new_event_rsvp_list_path(@events) %>
+<%= link_to 'Back', user_events_path(current_user.id) %>

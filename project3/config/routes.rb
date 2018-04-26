@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   }
 
   resources :events do
-    resources :users
+    resources :users, :rsvp_lists
   end
 
   resources :users do
@@ -19,7 +19,6 @@ Rails.application.routes.draw do
   end
 
   resources :user_event_datum
-  resources :rsvp_lists
 
   root "home#index"
 
