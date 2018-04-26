@@ -10,6 +10,7 @@ class CreateEventUserData < ActiveRecord::Migration[5.2]
       t.integer :num_babies
       t.integer :num_toddlers
       t.boolean :require_carpark
+      t.text :message
       t.boolean :attended
 
       t.timestamps

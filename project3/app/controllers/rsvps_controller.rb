@@ -132,6 +132,7 @@ class RsvpsController < ApplicationController
         case is_owner?(@event, current_user)
           when true # ___IS OWNER
             @rsvp = Rsvp.find_by_id(params[:id])
+            @event_user_datum = @rsvp.event_user_datum
             @user_role = :owner
           when false
             if is_invited?(@event, current_user) # ___IS GUEST
@@ -181,13 +182,13 @@ class RsvpsController < ApplicationController
         user = User.find_by_email(rsvp[:email])
         tmp = Rsvp.create! rsvp
         tmp.user = user
-        tmp_event_user_datum = tmp.create_event_user_datum()
+        tmp_event_user_datum = tmp.create_event_user_datum(user_role: :guest)
         tmp_event_user_datum.save
       else
         tmpstring = rsvp[:email] + rsvp[:event_id].to_s
         rsvp[:key] = BCrypt::Password.create(tmpstring).to_s
         tmp = Rsvp.create! rsvp
-        tmp_event_user_datum = tmp.create_event_user_datum()
+        tmp_event_user_datum = tmp.create_event_user_datum(user_role: :guest)
         tmp_event_user_datum.save
       end
       RsvpMailer.with(sender: current_user.username, rsvp: tmp).rsvp_email.deliver_now

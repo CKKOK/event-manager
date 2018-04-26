@@ -1,9 +1,62 @@
-<h1>RSVP Edit Form</h1>
-<h1>Form goes here, prepopulated</h1>
-<h1><%= @user_role %></h1>
 <% if @user_role == :owner %>
-    <%= @rsvps %>
+    <h1>Invitation List</h1>
+    <% @rsvps.each do |rsvp| %>
+        <%= rsvp.name %>, <%= rsvp.email %> <br>
+    <% end %>
 <% elsif @user_role == :guest %>
-    <%= @rsvp.name %>
-    <%= @event_user_datum %>
+    <h1>RSVP from <%= @rsvp.name %></h1>
+    <% if params[:attending] == 'yes'%>
+        <%= form_for @event_user_datum, url:events_users_datum_path(@event_user_datum), method: :patch do |form| %>
+            <%= f.hidden_field :attending, value: 'Yes' %>
+
+            <p>
+                <%= form.label :relation, 'Relationship with event owner' %><br>
+                <%= form.text_field :relation %>
+            </p>
+
+            <p>
+                <%= form.label :diet, 'Dietary Needs' %><br>
+                <%= form.text_field :diet %>
+            </p>
+
+            <p>
+                <%= form.label :additional_persons, 'Number of Additional Persons' %><br>
+                <%= form.text_field :additional_persons %>
+            </p>
+
+            <p>
+                <%= form.label :num_babies, 'Number of Babies' %><br>
+                <%= form.text_field :num_babies %>
+            </p>
+
+            <p>
+                <%= form.label :num_toddlers, 'Number of Toddlers' %><br>
+                <%= form.text_field :num_toddlers %>
+            </p>
+
+            <p>
+                <%= form.label :require_carpark, 'Parking lot needed?' %><br>
+                <%= form.select :require_carpark, options_for_select(['Yes', 'No']) %>
+            </p>
+
+            <p>
+                <%= form.submit 'Update my response'%>
+            </p>
+        <% end %>
+    <% else %>
+        <%= form_for @event_user_datum, url:events_users_datum_path(@event_user_datum), method: :patch do |form| %>
+            <%= f.hidden_field :attending, value: 'No' %>
+            <p>
+                <%= form.label :message, 'Leave a message? (Optional)' %><br>
+                <%= form.text_area :message %>
+            </p>
+
+            <p>
+                <%= form.submit 'Update my response'%>
+            </p>
+        <% end %>
+    <% end %>
+
+
+
 <% end %>
