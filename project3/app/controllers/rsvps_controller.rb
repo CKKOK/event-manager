@@ -118,7 +118,7 @@ class RsvpsController < ApplicationController
               redirect_to root_path
               return
             else # ___KEY IS VALID (i.e. USER DOES NOT EXIST IN SYSTEM YET)
-              redirect_to edit_rsvp_path(@rsvp, key: params[:key])
+              redirect_to edit_rsvp_path(@rsvp, key: params[:key], attending: params[:attending])
               return
             end
           end
