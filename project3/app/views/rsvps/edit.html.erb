@@ -4,5 +4,6 @@
 <% if @user_role == :owner %>
     <%= @rsvps %>
 <% elsif @user_role == :guest %>
-    <%= @rsvp %>
+    <%= @rsvp.name %>
+    <%= @event_user_datum %>
 <% end %>
