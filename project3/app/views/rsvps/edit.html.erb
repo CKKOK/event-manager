@@ -7,10 +7,10 @@
     <h1>RSVP from <%= @rsvp.name %></h1>
     <% if params[:attending] == 'yes'%>
         <%= form_for @event_user_datum, url:events_users_datum_path(@event_user_datum), method: :patch do |form| %>
-            <%= f.hidden_field :attending, value: 'Yes' %>
+            <%= form.hidden_field :attending, value: 'Yes' %>
 
             <p>
-                <%= form.label :relation, 'Relationship with event owner' %><br>
+                <%= form.label :relation, "Relationship with #{@sender}" %><br>
                 <%= form.text_field :relation %>
             </p>
 
@@ -45,7 +45,7 @@
         <% end %>
     <% else %>
         <%= form_for @event_user_datum, url:events_users_datum_path(@event_user_datum), method: :patch do |form| %>
-            <%= f.hidden_field :attending, value: 'No' %>
+            <%= form.hidden_field :attending, value: 'No' %>
             <p>
                 <%= form.label :message, 'Leave a message? (Optional)' %><br>
                 <%= form.text_area :message %>

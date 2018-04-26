@@ -11,6 +11,6 @@ class EventsUsersDataController < ApplicationController
   private
 
   def event_user_datum_params
-    params.require(:event_user_datum).permit(:attending, :relation, :diet, :additional_persons, :num_babies, :num_toddlers, :require_carpark)
+    params.require(:event_user_datum).permit(:attending, :relation, :diet, :additional_persons, :num_babies, :num_toddlers, :require_carpark, :message)
   end
 end

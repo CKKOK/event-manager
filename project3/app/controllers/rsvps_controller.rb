@@ -194,7 +194,7 @@ class RsvpsController < ApplicationController
       RsvpMailer.with(sender: current_user.username, rsvp: tmp).rsvp_email.deliver_now
     }
     if rsvps.length > 0
-      flash[:notice] = "Created #{pluralize rsvps.length, 'invitations'}"
+      flash[:notice] = "Created #{rsvps.length} #{'invitations'.pluralize(rsvps.length)}"
     end
     redirect_to root_path
     return
@@ -229,6 +229,7 @@ class RsvpsController < ApplicationController
               return
             else # ___KEY IS VALID (i.e. USER DOES NOT EXIST IN SYSTEM YET)
               @user_role = :guest
+              @owner = @rsvp.event.rsvps.where(event_user_datum: EventUserDatum.where(user_role: 'owner')).first.name
               @event_user_datum = @rsvp.event_user_datum
             end
           end
