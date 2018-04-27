@@ -17,7 +17,7 @@
         <%= submit_tag 'Submit' %>
     <% end %>
 <% elsif @user_role == :guest %>
-    <h1>RSVP from <%= @rsvp.name %> for <%= @event.title %></h1>
+    <h1>RSVP from <%= @rsvp.name %> for <%= @rsvp.event.title %></h1>
     <% if params[:attending] == 'yes'%>
         <%= form_for @event_user_datum, url:events_users_datum_path(@event_user_datum), method: :patch do |form| %>
             <%= form.hidden_field :attending, value: 'Yes' %>
