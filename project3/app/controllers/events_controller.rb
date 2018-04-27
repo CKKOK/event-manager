@@ -8,7 +8,6 @@ class EventsController < ApplicationController
         if params[:user_id]
             @user = User.find(current_user.id)
             @events = @user.events.all
-            byebug
         else
             # sign in
         end

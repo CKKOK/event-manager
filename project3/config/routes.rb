@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     #unlocks: 'users/unlocks',
     #omniauth: 'users/omniauth'
   }
+  
+  get 'events/:event_id/rsvps/export', :to => 'rsvps#export', :as => 'export_event_rsvps'
+  get 'users/:user_id/events/:event_id/rsvps/export', :to => 'rsvps#export', :as => 'export_user_event_rsvps'
 
   resources :events do
     resources :rsvps
