@@ -208,6 +208,7 @@ class RsvpsController < ApplicationController
         case is_owner?(@event, current_user)
           when true # ___IS OWNER
             @user_role = :owner
+            @user = current_user
             @rsvps = Rsvp.where(:event_id => @event[:id])
           when false
             if is_invited?(@event, current_user) # ___IS GUEST
@@ -239,16 +240,17 @@ class RsvpsController < ApplicationController
 
   def update
     # Updates only a single record. Deal with this via AJAX?
-    @rsvp = Rsvp.find(params[:id])
-    if user_email_exists?(params[:email])
-      params[:key] = nil
-      # send email out
-    else
-      params[:key] = BCrypt::Password.new(params[:email] << params[:event_id].to_s)
-      # send email out
-    end
-    @rsvp.update(name: params[:name], email: params[:email], key: params[:key])
+    rsvp = Rsvp.find(params[:id])
+    # if user_email_exists?(params[:email])
+    #   params[:key] = nil
+    #   # send email out
+    # else
+    #   params[:key] = BCrypt::Password.new(params[:email] << params[:event_id].to_s)
+    #   # send email out
+    # end
+    rsvp.update(rsvp_update_params)
     # redirect_to root_path
+    head :ok, :content_type => 'text/html'
   end
 
   def destroy
@@ -256,6 +258,7 @@ class RsvpsController < ApplicationController
     @rsvp = Rsvp.find(params[:id])
     @rsvp.destroy
     # redirect_to root_path
+    head :ok, :content_type => 'text/html'
   end
 
   def export
@@ -296,5 +299,9 @@ class RsvpsController < ApplicationController
 
   def rsvp_params
     params.require(:rsvp).permit(:event_id, :name, :email)
+  end
+
+  def rsvp_update_params
+    params.require(:rsvp).permit(:name, :email)
   end
 end
