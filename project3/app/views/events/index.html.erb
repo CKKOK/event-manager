@@ -7,7 +7,7 @@
     <th>Show</th>
     <th>Edit</th>
     <th>Destroy</th>
-    <th>Add Invitee</th>
+    <th>RSVP List</th>
   </tr>
   
   <% @events.each do |event| %>
@@ -20,10 +20,9 @@
         method: :delete,
         data: { confirm: 'Are you sure?' } %>
     </td>
-    <td><%= link_to 'Add Invitee', event_rsvp_lists_path(event) %></td>
+    <td><%= link_to 'View', event_rsvps_path(event) %></td>
   </tr>
   <% end %>
-
 </table>
 
 <%= link_to 'Create Event', new_user_event_path(@user) %>

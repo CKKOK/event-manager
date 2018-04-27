@@ -11,14 +11,18 @@ Rails.application.routes.draw do
   }
 
   resources :events do
-    resources :users, :rsvp_lists
+    resources :rsvps
+    resources :users
   end
 
   resources :users do
-    resources :events
+    resources :events do
+      resources :rsvps
+    end
   end
 
-  resources :user_event_datum
+  resources :events_users_data
+  resources :rsvps
 
   root "home#index"
 

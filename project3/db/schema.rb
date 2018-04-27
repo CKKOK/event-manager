@@ -10,10 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_23_065510) do
+ActiveRecord::Schema.define(version: 2018_04_23_065520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "event_user_data", force: :cascade do |t|
+    t.bigint "rsvp_id"
+    t.text "relation"
+    t.text "user_role"
+    t.text "attending"
+    t.text "diet"
+    t.integer "additional_persons"
+    t.integer "num_babies"
+    t.integer "num_toddlers"
+    t.text "require_carpark"
+    t.text "message"
+    t.boolean "attended"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rsvp_id"], name: "index_event_user_data_on_rsvp_id"
+  end
 
   create_table "events", force: :cascade do |t|
     t.datetime "datetime"
@@ -31,33 +48,20 @@ ActiveRecord::Schema.define(version: 2018_04_23_065510) do
     t.index ["user_id"], name: "index_events_users_on_user_id"
   end
 
-  create_table "rsvp_lists", force: :cascade do |t|
+  create_table "rsvps", force: :cascade do |t|
     t.bigint "event_id"
+    t.bigint "user_id"
     t.string "name"
     t.text "email"
     t.text "key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_rsvp_lists_on_event_id"
-  end
-
-  create_table "user_event_data", force: :cascade do |t|
-    t.bigint "event_id"
-    t.text "relation"
-    t.text "user_role"
-    t.boolean "attending"
-    t.text "diet"
-    t.integer "additional_persons"
-    t.integer "num_babies"
-    t.integer "num_toddlers"
-    t.boolean "require_carpark"
-    t.boolean "attended"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_user_event_data_on_event_id"
+    t.index ["event_id"], name: "index_rsvps_on_event_id"
+    t.index ["user_id"], name: "index_rsvps_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "username", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -70,13 +74,13 @@ ActiveRecord::Schema.define(version: 2018_04_23_065510) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "event_user_data", "rsvps"
   add_foreign_key "events_users", "events"
   add_foreign_key "events_users", "users"
-  add_foreign_key "rsvp_lists", "events"
-  add_foreign_key "user_event_data", "events"
+  add_foreign_key "rsvps", "events"
+  add_foreign_key "rsvps", "users"
 end

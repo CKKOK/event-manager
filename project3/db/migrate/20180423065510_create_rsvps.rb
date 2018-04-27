@@ -1,8 +1,11 @@
-class CreateEventsUsers < ActiveRecord::Migration[5.2]
+class CreateRsvps < ActiveRecord::Migration[5.2]
   def change
-    create_table :events_users do |t|
+    create_table :rsvps do |t|
       t.references :event, foreign_key: true
       t.references :user, foreign_key: true
+      t.string :name
+      t.text :email
+      t.text :key
 
       t.timestamps
     end

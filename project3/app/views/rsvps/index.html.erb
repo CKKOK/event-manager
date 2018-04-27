@@ -1,0 +1,28 @@
+<% if @user_role == :owner %>
+    <h1>All RSVPs for <%= @event.title %></h1>
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Attending</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @rsvps.each.with_index(1) do |rsvp, index| %>
+                <tr>
+                    <td><%= index %></td>
+                    <td><%= rsvp.name.capitalize %></td>
+                    <td><%= rsvp.email %></td>
+                    <td><%= rsvp.event_user_datum.user_role %></td>
+                    <td><%= rsvp.event_user_datum.attending %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <%= link_to 'Add', new_event_rsvp_path(@event) %>
+    <%= link_to 'Back', user_events_path(current_user.id) %>
+<% end %>
+

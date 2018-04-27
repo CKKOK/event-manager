@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EventsController < ApplicationController
     
     before_action :authenticate_user!#, :except => [ :show, :index ]
@@ -6,6 +8,7 @@ class EventsController < ApplicationController
         if params[:user_id]
             @user = User.find(current_user.id)
             @events = @user.events.all
+            byebug
         else
             # sign in
         end
@@ -36,6 +39,13 @@ class EventsController < ApplicationController
 
         @event.save
         @user.events << @event
+
+        @rsvp = Rsvp.new(event_id: @user.events.last.id, user_id: current_user.id, name: current_user.username, email: current_user.email)
+        @rsvp.save
+
+        @eventuserdata = EventUserDatum.new(rsvp_id: @rsvp.id, user_role: :owner)
+        @eventuserdata.save
+
         redirect_to user_events_path(@user)
     end
 

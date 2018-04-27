@@ -5,6 +5,6 @@
     <%= link_to 'Sign in', new_user_session_path %><br>
     <%= link_to 'Register', new_user_registration_path %>
 <% else %>
-    <h2>Hello there <%= current_user.name %></h2>
+    <h2>Hello there <%= current_user.username %></h2>
     <%= link_to 'log out', destroy_user_session_path, method: :delete %>
 <% end %>

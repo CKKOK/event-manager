@@ -1,0 +1,17 @@
+<h1>RSVP for <%= @event.title %> from <%= @rsvp.name %></h1>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Attending</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><%= @rsvp.name %></td>
+            <td><%= @rsvp.email %></td>
+            <td><%= @event_user_datum.attending %></td>
+        </tr>
+    </tbody>
+</table>
