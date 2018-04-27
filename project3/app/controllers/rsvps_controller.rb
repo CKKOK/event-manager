@@ -232,6 +232,7 @@ class RsvpsController < ApplicationController
               return
             else # ___KEY IS VALID (i.e. USER DOES NOT EXIST IN SYSTEM YET)
               @user_role = :guest
+              @event = Event.find_by_id(params[:event_id])
               @owner = @rsvp.event.rsvps.where(event_user_datum: EventUserDatum.where(user_role: 'owner')).first.name
               @event_user_datum = @rsvp.event_user_datum
             end
