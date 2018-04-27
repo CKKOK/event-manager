@@ -1,20 +1,61 @@
-<h1>Event</h1>
+<div class="container">
+    <div class="row">
+        <div class="events-grid-item1 col-sm-10">
+          <h1>Events</h1>
 
-<table border="solid">
-  <tr>
-    <th>DateTime</th>
-    <th>Title</th>
-    <th>Edit</th>
-  </tr>
-  
-  <% @events.each do |event| %>
-  <tr>
-    <td><%= event.datetime%></td>
-    <td><%= event.title%></td>
-  </tr>
-  <% end %>
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">DateTime</th>
+              <th scope="col">Title</th>
+              <th scope="col">Edit</th>
+            </tr>
+            </thead>
 
-</table>
+            <tbody>
+            <% @events.each do |event| %>
+            <tr>
+              <td><%= event.datetime%></td>
+              <td><%= event.title%></td>
+            </tr>
+            </tbody>
+            <% end %>
 
-<%= link_to 'Create Event', new_user_event_path(@user) %>
-<%= link_to 'Back', user_path(@user) %>
+          </table>
+
+          <!-- <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">First</th>
+                      <th scope="col">Last</th>
+                      <th scope="col">Handle</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                      <td>@mdo</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">2</th>
+                      <td>Jacob</td>
+                      <td>Thornton</td>
+                      <td>@fat</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td colspan="2">Larry the Bird</td>
+                      <td>@twitter</td>
+                    </tr>
+                  </tbody>
+                </table> -->
+
+          <%= link_to 'Create Event', new_user_event_path(@user), :class => "btn btn-outline-light"%>
+          <%= link_to 'Back', user_path(@user), :class => "btn btn-outline-light" %>
+        </div>
+    </div>    
+</div>
