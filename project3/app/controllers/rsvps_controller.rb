@@ -78,6 +78,7 @@
 #   end
 
 require 'bcrypt' # For encrypting the email + event_id for users without accounts
+require 'csv' # For exporting RSVPs as a csv file for download
 
 class RsvpsController < ApplicationController
 
@@ -97,8 +98,8 @@ class RsvpsController < ApplicationController
             @rsvps = @event.rsvps
           when false
             if is_invited?(@event, current_user) # ___IS GUEST
-              @rsvp = @event.rsvps.find_by_email(current_user.email)
-              redirect_to edit_user_event_rsvp_path(current_user, @event, @rsvp)
+              rsvp = @event.rsvps.find_by_email(current_user.email)
+              redirect_to edit_user_event_rsvp_path(current_user, @event, rsvp)
               return
             else # ___IS NEITHER OWNER NOR GUEST
               redirect_to user_events_path(current_user)
@@ -113,12 +114,12 @@ class RsvpsController < ApplicationController
             redirect_to root_path
             return
           when false # ___HAS KEY
-            @rsvp = Rsvp.find_by_key(params[:key])
-            if @rsvp.nil? # ___KEY IS INVALID
+            rsvp = Rsvp.find_by_key(params[:key])
+            if rsvp.nil? # ___KEY IS INVALID
               redirect_to root_path
               return
             else # ___KEY IS VALID (i.e. USER DOES NOT EXIST IN SYSTEM YET)
-              redirect_to edit_rsvp_path(@rsvp, key: params[:key], attending: params[:attending])
+              redirect_to edit_rsvp_path(rsvp, key: params[:key], attending: params[:attending])
               return
             end
           end
@@ -255,6 +256,14 @@ class RsvpsController < ApplicationController
     @rsvp = Rsvp.find(params[:id])
     @rsvp.destroy
     # redirect_to root_path
+  end
+
+  def export
+    rsvps = Rsvp.where(:event_id => params[:event_id])
+    title = Event.find(params[:event_id]).title
+    respond_to do |format|
+      format.html { send_data rsvps.to_csv, filename: "#{title}-rsvps-#{Date.today}.csv" }
+    end
   end
 
   private
