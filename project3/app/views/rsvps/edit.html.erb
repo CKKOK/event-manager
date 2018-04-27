@@ -1,7 +1,20 @@
 <% if @user_role == :owner %>
     <h1>Invitation List</h1>
     <% @rsvps.each do |rsvp| %>
-        <%= rsvp.name %>, <%= rsvp.email %> <br>
+        <%= form_for rsvp, url: user_event_rsvp_path(@user, @event, rsvp), :remote => true, method: :patch do |f| %>
+            <%= f.label :name %>: <%= f.text_field :name %> <%= f.label :email %>: <%= f.text_field :email, :readonly => true %> <%= f.submit 'Update'%>
+        <% end %>
+    <% end %>
+    <%= form_tag rsvps_path do %>
+        <%= render 'fields', index: 0 %>
+
+        <%=
+            button_tag 'Add invitation',
+            type: 'button',
+            id: 'add-invitation',
+            data: { fields: render('fields', index: '__INDEX__').gsub('\n', '') }
+        %>
+        <%= submit_tag 'Submit' %>
     <% end %>
 <% elsif @user_role == :guest %>
     <h1>RSVP from <%= @rsvp.name %> for <%= @event.title %></h1>

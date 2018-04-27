@@ -1,5 +1,14 @@
 <h1>Event</h1>
 
-<p><%= @event.datetime %><%= @event.title %></p>
+<p>
+    <strong>DateTime: </strong>
+    <%= @event.datetime %>
+</p>
 
+<p>
+    <strong>Title: </strong>
+    <%= @event.title %>
+</p>
+
+<%= link_to 'Edit', edit_user_event_path(@user, @event) %>
 <%= link_to 'Back', user_events_path %>

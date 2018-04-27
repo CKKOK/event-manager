@@ -2,10 +2,10 @@
     <%= fields_for :rsvp do |f| %>
         <%= f.hidden_field :event_id, value: @event[:id], index: index %>
 
-        <%= f.label :name, index: index %>
+        <%= f.label :name, index: index %>: 
         <%= f.text_field :name, index: index %>
 
-        <%= f.label :email, index: index %>
+        <%= f.label :email, index: index %>: 
         <%= f.email_field :email, index: index %>
     <% end %>
 </fieldset>
