@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   }
   
   get 'events/:event_id/rsvps/export', :to => 'rsvps#export', :as => 'export_event_rsvps'
-  get 'events/:event_id/rsvps/edit', :to => 'rsvps#edit'
+  get 'events/:event_id/rsvps/edit', :to => 'rsvps#edit', :as => 'edit_user_event_rsvp_list'
   get 'users/:user_id/events/:event_id/rsvps/export', :to => 'rsvps#export', :as => 'export_user_event_rsvps'
   get 'users/:user_id/events/:event_id/rsvps/edit', :to => 'rsvps#edit'
   
