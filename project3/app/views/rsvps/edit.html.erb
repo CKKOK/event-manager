@@ -5,7 +5,7 @@
             <%= f.label :name %>: <%= f.text_field :name %> <%= f.label :email %>: <%= f.text_field :email, :readonly => true %> <%= f.submit 'Update'%>
         <% end %>
     <% end %>
-    <%= form_tag rsvps_path do %>
+    <%= form_tag event_rsvps_path do %>
         <%= render 'fields', index: 0 %>
 
         <%=
