@@ -174,6 +174,7 @@ class RsvpsController < ApplicationController
   end
 
   def create
+    @event = Event.find(params[:event_id])
     rsvps = params[:rsvp].values.reject do |rsvp|
       rsvp.values.any? &:blank?
     end
@@ -197,7 +198,7 @@ class RsvpsController < ApplicationController
     if rsvps.length > 0
       flash[:notice] = "Created #{rsvps.length} #{'invitation'.pluralize(rsvps.length)}"
     end
-    redirect_to root_path
+    redirect_to event_rsvps_path(@event)
     return
   end
 

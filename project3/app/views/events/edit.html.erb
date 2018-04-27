@@ -1,0 +1,21 @@
+<h1>Edit article</h1>
+
+<%= form_with(model: @event, local: true) do |form| %>
+
+  <p>
+    <%= form.label :datetime %><br>
+    <%= form.datetime_field :datetime %>
+  </p>
+
+  <p>
+    <%= form.label :title %><br>
+    <%= form.text_area :title %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+
+<% end %>
+
+<%= link_to 'Back', user_events_path %>

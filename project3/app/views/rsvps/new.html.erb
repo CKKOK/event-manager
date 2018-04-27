@@ -1,6 +1,6 @@
 <h1>New Invitation List</h1>
 
-<%= form_tag rsvps_path do %>
+<%= form_tag event_rsvps_path do %>
 <%= render 'fields', index: 0 %>
 
 <%=
@@ -11,3 +11,4 @@
 %>
 <%= submit_tag 'Submit' %>
 <% end %>
+<%= link_to 'Back', event_rsvps_path(@event) %>

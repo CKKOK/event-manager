@@ -1,0 +1,9 @@
+<h1>Welcome <%= @user.username.capitalize %>!</h1>
+
+<%= link_to 'Create Event', new_user_event_path(@user) %>
+
+<%= link_to 'View Event', user_events_path(@user) %>
+
+<%= link_to 'Edit Personal Details', edit_user_registration_path(@user) %>
+
+<%= link_to 'log out', destroy_user_session_url, method: :delete %>
