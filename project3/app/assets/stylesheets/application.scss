@@ -18,11 +18,28 @@
 
 body {
 	background-image: asset-url('anne-edgar-119384-unsplash.jpg');
+	background-size: 100%;
+	background-repeat: no-repeat;
+
 }
 
-image {
-	display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
+/* Sticky footer styles */
+
+
+
+.footer {
+  position: absolute;
+  text-align: center;
+  font-family: "Brush Script MT", cursive;
+  bottom: 0;
+  color: white;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  opacity: 1; // Leave this as 1
+  background-color: rgba(0,0,0,0.6);
+}
+
+.text-muted {
+	font-size: 30px;
+	color: white;
 }

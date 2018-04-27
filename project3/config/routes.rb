@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   resources :user_event_datum
   resources :rsvp_lists
+  # resources :About_Us, controller: 'About_Us'
 
   root "home#index"
 
