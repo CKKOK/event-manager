@@ -1,7 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
  
   <a class="navbar-brand" href="#">
-    <img src="/assets/images/screenshot1.png" width="30" height="30" alt="Hi">
+    
+    <%= image_tag("if_14_couple_bride_love_romance_wedding_valentinr_2909021.svg")  %>
   </a>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,66 +31,146 @@
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>
-</nav>
+</nav> -->
 
-<div class="jumbotron jumbotron-fluid">
+<!-- <div class="jumbotron jumbotron-fluid">
   <div class="wedding-grid-container">
     <h1 class="display-4">The Wedding For You and Me</h1>
     <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
   </div>
-</div>
+</div> -->
 
+<!-- <div id="nav">
+     <ul>
+         <li><a href="#Home">Home</a></li>
+         <li><a href="#About">About Us</a></li>
+         <li><a href="#Contact">Contact Us</a></li>
+     </ul>
+</div> -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://github.com/kswedberg/jquery-smooth-scroll/blob/master/jquery.smooth-scroll.min.js"></script>
+<script>
+$('.smooth').on('click', function() {
+    $.smoothScroll({
+        scrollElement: $('body'),
+        scrollTarget: '#' + this.id
+    });
+    
+    return false;
+});
+</script>
+
+
+<div id="page1">
+  <a id="Home" class="smooth"></a>
+ 
 <div class="container">
-	<div class="row">
-		<div class="wedding-grid-item1 col-sm-4">
-				<h1>Home</h1>
+  <div class="row">
+    <div class="wedding-grid-item1 col-sm-8">
+        <h1>Tie the Knot</h1>
 
-				<form>
-				
-					  <div class="form-group">
-							    <label class="control-label" for="exampleInputEmail1">Email Address</label>
-							    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-							    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-					  </div>
-				  	
-				
-					  <div class="form-group">
-						    <label for="exampleInputPassword1">Password</label>
-						    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-					  </div>
-				
-					  <div class="form-group">
-						    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-						    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-					  </div>
+        <form>
 
-				  		<button type="submit" class="btn btn-outline-light">Sign Me In</button>
+            <% if !user_signed_in? %>
 
-				  	  <div class="form-group">
-				  	  		<form method="GET" action="users/new">
-				  	  			<button type="submit" class="btn btn-outline-light">Register Me</button>
-				  	  			<small id="emailHelp" class="form-text text-muted">Do not have an account? Just click on the button above!</small>
-				  	  		</form>
-				  	  </div>
-				</form>
-		</div>
-	</div>
+        
+            <!-- <div class="form-group">
+                  <label class="control-label" for="exampleInputEmail1">Email Address</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            
+        
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+        
+            <div class="form-group">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div> -->
+
+               <%= link_to 'Sign Me In', new_user_session_path, :class => "btn btn-outline-light" %><br>
+
+              <div class="form-group">
+                  <form method="GET" action="/users/sign_up">
+                    <p>Do not have an account? Just click on the button below!</p>
+                    <%= link_to 'Register Me', new_user_registration_path, :class => "btn btn-outline-light" %>
+
+                    <% else %>
+                        <h2>Hello there <%= current_user.username %></h2>
+                        <%= link_to 'log out', destroy_user_session_path, method: :delete %>
+                    <% end %>
+                  </form>
+              </div>
+        </form>
+    </div>
+  </div>
 </div>
 
-<% if !user_signed_in? %>
-     <!-- Need to check for the presence of a token here for guest user -->
-     <%= link_to 'Sign in', new_user_session_path %><br>
-     <%= link_to 'Register', new_user_registration_path %>
- <% else %>
-     <h2>Hello there <%= current_user.username %></h2>
-     <%= link_to 'log out', destroy_user_session_path, method: :delete %>
- <% end %>
+</div>
 
-<footer class="footer">
-	<div class="container">
-		<span class="text-muted">Place stick footer content here.</span>
-	</div>
-</footer>
+<div id="page2">
+  <a id="About" class="smooth"></a>
+    
+<section id="about" class="content-section text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2>About Us</h2>
+            <p>Grayscale is a free Bootstrap theme created by Start Bootstrap. It can be yours right now, simply download the template on
+              <a href="http://startbootstrap.com/template-overviews/grayscale/">the preview page</a>. The theme is open source, and you can use it for any purpose, personal or commercial.</p>
+            <p>This theme features stock photos by
+              <a href="http://gratisography.com/">Gratisography</a>
+              along with a custom Google Maps skin courtesy of
+              <a href="http://snazzymaps.com/">Snazzy Maps</a>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+</div>
+
+<div id="page3">
+  <a id="Contact" class="smooth"></a>
+    
+    <section id="about" class="content-section text-center">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8 mx-auto">
+                <h2>Contact Us</h2>
+                <p>Grayscale is a free Bootstrap theme created by Start Bootstrap. It can be yours right now, simply download the template on
+                  <a href="http://startbootstrap.com/template-overviews/grayscale/">the preview page</a>. The theme is open source, and you can use it for any purpose, personal or commercial.</p>
+                <p>This theme features stock photos by
+                  <a href="http://gratisography.com/">Gratisography</a>
+                  along with a custom Google Maps skin courtesy of
+                  <a href="http://snazzymaps.com/">Snazzy Maps</a>.</p>
+              </div>
+            </div>
+          </div>
+    </section>
+
+</div>
+
+
+<!-- <section id="about" class="content-section text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2>About Grayscale</h2>
+            <p>Grayscale is a free Bootstrap theme created by Start Bootstrap. It can be yours right now, simply download the template on
+              <a href="http://startbootstrap.com/template-overviews/grayscale/">the preview page</a>. The theme is open source, and you can use it for any purpose, personal or commercial.</p>
+            <p>This theme features stock photos by
+              <a href="http://gratisography.com/">Gratisography</a>
+              along with a custom Google Maps skin courtesy of
+              <a href="http://snazzymaps.com/">Snazzy Maps</a>.</p>
+          </div>
+        </div>
+      </div>
+    </section> -->
+>>>>>>> jacob_branch

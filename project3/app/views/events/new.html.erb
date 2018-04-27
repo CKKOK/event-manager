@@ -1,18 +1,31 @@
-<h1>Create New Event</h1>
+<div class="container">
+  <div class="row">
+    <div class="registration-grid-item1 col-md-12">
+        <h1>Your Wedding Date</h1>
 
-<%= form_with scope: :event, url: events_path, local: true do |form| %>
-  
-  <p>
-    <%= form.label :datetime %><br>
-    <%= form.datetime_field :datetime %>
-  </p>
 
-  <p>
-    <%= form.label :title %><br>
-    <%= form.text_field :title %>
-  </p>
-
-  <p>
-    <%= form.submit %>
-  </p>
-<% end %>
+            <%= form_with scope: :event, url: events_path, local: true do |form| %>
+          
+          <%#= form.hidden_field :user_ids, @user, :id %>
+            <div class="form-group">
+                <p>
+                  <%= form.label :Date_Time %><br>
+                  <%= form.datetime_field :datetime, :class => "form-control" %>
+                </p>
+            </div>
+            <div class="form-group">
+                <p>
+                  <%= form.label :Title %><br>
+                  <%= form.text_field :Title, :class =>"form-control" %>
+                </p>
+            </div>    
+                <p>
+                  <%= form.submit "Submit", :class =>"btn btn-outline-light" %>
+                </p>
+                <p>
+                  <%= link_to 'Back', user_path(@user), :class => "btn btn-outline-light" %>
+                </p>
+        <% end %>
+    </div>
+  </div>
+</div>

@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
+
     def index
     end
 
     def show
         @user = User.find(current_user.id)
+        @back_url = session[:my_previous_url]
     end
 
     def new
