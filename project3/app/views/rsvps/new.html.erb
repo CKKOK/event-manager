@@ -1,0 +1,14 @@
+<h1>New RSVPs</h1>
+<h1>Form for creating a tonne of RSVPs goes here</h1>
+
+<%= form_tag rsvps_path do %>
+<%= render 'fields', index: 0 %>
+
+<%=
+    button_tag 'Add invitation',
+    type: 'button',
+    id: 'add-invitation',
+    data: { fields: render('fields', index: '__INDEX__').gsub('\n', '') }
+%>
+<%= submit_tag 'Submit' %>
+<% end %>
