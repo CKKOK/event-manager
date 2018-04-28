@@ -6,12 +6,15 @@ ruby '2.5.1'
 # User authentication
 gem 'devise'
 
+# gem 'wdm' (For running a Rails server on Windows)
+
 # For front-end styling
 gem 'bootstrap'
 gem 'jquery-rails'
 
 # Embeds the V8 JS Engine into Ruby. Fixes a regex error thrown by the bootstrap gem under certain contexts
-gem 'therubyracer'
+# CK - Disabled therubyracer AND duktape. They shouldn't be needed if nodejs is installed. The regex error seems to be caused by duktape previously, so therubyracer fixed it, but technically neither gem is required.
+# gem 'therubyracer'
 
 # https://github.com/roo-rb/roo
 gem 'roo'
@@ -37,7 +40,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
