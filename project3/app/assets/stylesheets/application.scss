@@ -16,6 +16,10 @@
  @import "base";
  @import "home";
 
+html {
+  width: 100%;
+}
+
 body {
 	background-image: asset-url('anne-edgar-119384-unsplash.jpg');
 	background-size: 100%;
