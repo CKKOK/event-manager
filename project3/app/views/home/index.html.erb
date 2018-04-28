@@ -53,6 +53,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://github.com/kswedberg/jquery-smooth-scroll/blob/master/jquery.smooth-scroll.min.js"></script>
+
 <script>
 $('.smooth').on('click', function() {
     $.smoothScroll({
@@ -103,7 +104,7 @@ $('.smooth').on('click', function() {
                     <%= link_to 'Register Me', new_user_registration_path, :class => "btn btn-outline-light" %>
 
                     <% else %>
-                        <h2>Hello there <%= current_user.username %></h2>
+                        <h2>Hello there <%= current_user.username.titleize %></h2>
                         <%= link_to 'log out', destroy_user_session_path, method: :delete %>
                     <% end %>
                   </form>
@@ -173,4 +174,3 @@ $('.smooth').on('click', function() {
         </div>
       </div>
     </section> -->
->>>>>>> jacob_branch
