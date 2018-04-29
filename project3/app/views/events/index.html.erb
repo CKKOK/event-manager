@@ -1,4 +1,4 @@
-<h1>Event</h1>
+<h1>My Event</h1>
 
 <table border="solid">
   <tr>
@@ -21,6 +21,24 @@
         data: { confirm: 'Are you sure?' } %>
     </td>
     <td><%= link_to 'View', event_rsvps_path(event) %></td>
+  </tr>
+  <% end %>
+</table>
+
+<h1>Invited Event</h1>
+
+<table border="solid">
+  <tr>
+    <th>DateTime</th>
+    <th>Title</th>
+    <th>My RSVP</th>
+  </tr>
+  
+  <% @invited_events.each do |event| %>
+  <tr>
+    <td><%= event.datetime%></td>
+    <td><%= event.title%></td>
+    <td>Link to Event_User_Data</td>
   </tr>
   <% end %>
 </table>

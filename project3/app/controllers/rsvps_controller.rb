@@ -183,7 +183,8 @@ class RsvpsController < ApplicationController
         rsvp[:key] = nil
         user = User.find_by_email(rsvp[:email])
         tmp = Rsvp.create! rsvp
-        tmp.user = user
+        tmp.user_id = user.id
+        tmp.save
         tmp_event_user_datum = tmp.create_event_user_datum(user_role: :guest)
         tmp_event_user_datum.save
       else

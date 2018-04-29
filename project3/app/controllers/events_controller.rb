@@ -8,6 +8,7 @@ class EventsController < ApplicationController
         if params[:user_id]
             @user = User.find(current_user.id)
             @events = @user.events.all
+            @invited_events = Event.find_by_sql("SELECT datetime, title from events INNER JOIN rsvps ON events.id = rsvps.event_id INNER JOIN event_user_data ON rsvps.id = event_user_data.rsvp_id WHERE event_user_data.user_role = 'guest' AND rsvps.email = '#{current_user.email}'")
         else
             # sign in
         end
