@@ -79,6 +79,7 @@
 
 require 'bcrypt' # For encrypting the email + event_id for users without accounts
 require 'csv' # For exporting RSVPs as a csv file for download
+require 'rqrcode'
 
 class RsvpsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :edit]
@@ -180,7 +181,8 @@ class RsvpsController < ApplicationController
     end
     rsvps.each { |rsvp| 
       if user_email_exists?(rsvp[:email]) 
-        rsvp[:key] = nil
+        tmpstring = rsvp[:email] + rsvp[:event_id].to_s
+        rsvp[:key] = BCrypt::Password.create(tmpstring).to_s
         user = User.find_by_email(rsvp[:email])
         tmp = Rsvp.create! rsvp
         tmp.user = user
@@ -242,15 +244,7 @@ class RsvpsController < ApplicationController
   def update
     # Updates only a single record. Deal with this via AJAX?
     rsvp = Rsvp.find(params[:id])
-    # if user_email_exists?(params[:email])
-    #   params[:key] = nil
-    #   # send email out
-    # else
-    #   params[:key] = BCrypt::Password.new(params[:email] << params[:event_id].to_s)
-    #   # send email out
-    # end
     rsvp.update(rsvp_update_params)
-    # redirect_to root_path
     head :ok, :content_type => 'text/html'
   end
 

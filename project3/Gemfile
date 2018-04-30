@@ -3,6 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
+# QR Code Generator
+gem 'rqrcode'
+
 # User authentication
 gem 'devise'
 
