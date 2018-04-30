@@ -1,0 +1,50 @@
+<%= form_tag(event_attendance_scan_path(@event), id: "attendance-scanner", remote: true, method: :post) do %>
+	<%= hidden_field_tag :key %>
+<% end %>
+
+<div class="preview-container">
+	<video id="preview"></video>
+</div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/3.3.3/adapter.min.js"></script>
+<script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+<script>
+  var scanner = {};
+
+  function camSelect(camera) {
+    this.activeCameraId = camera.id;
+    this.scanner.start(camera);
+  }
+
+  function camStart(scannerObject) {
+    scannerObject.scans = [];
+
+    scannerObject.scanner = new Instascan.Scanner({
+      video: document.getElementById('preview'),
+      scanPeriod: 5
+    });
+    
+    function onDecode (content, image) {
+      // scannerObject.scans.unshift(content);
+      $('#key').val(content);
+      console.log(content);
+      Rails.fire($('#attendance-scanner')[0], 'submit');
+    }
+
+    scannerObject.scanner.addListener('scan', onDecode);
+    
+    Instascan.Camera.getCameras().then(function (cameras) {
+      scannerObject.cameras = cameras;
+      if (cameras.length > 0) {
+        scannerObject.activeCameraId = cameras[0].id;
+        scannerObject.scanner.start(cameras[0]);
+      } else {
+        console.error('No cameras found.');
+      }
+    }).catch(function (e) {
+      console.error(e);
+    });
+  };
+
+  camStart(scanner);
+</script>

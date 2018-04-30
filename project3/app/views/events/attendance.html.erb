@@ -1,6 +1,7 @@
 <h1>Attendance List</h1>
 <% @event_user_data.each do |e| %>
 	<%= form_for e, url: events_users_datum_update_attendance_path(e), :remote => true, method: :patch do |f| %>
-		Name: <%= e.rsvp.user ? e.rsvp.user.username : e.rsvp.name %>,  <%= f.label :attended %>: <%= f.check_box :attended, :onchange => "Rails.fire(this.form,'submit')" %>
+		Name: <%= e.rsvp.user ? e.rsvp.user.username : e.rsvp.name %>, <%= f.label :attended %>: <%= f.check_box :attended, :onchange => "Rails.fire(this.form,'submit')" %>
 	<% end %>
 <% end %>
+

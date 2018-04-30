@@ -71,7 +71,16 @@ class EventsController < ApplicationController
 
   def attendance_scanner
     @event = Event.find(params[:event_id])
-    
+  end
+
+  def attendance_scan
+    event = Event.find(params[:event_id])
+    key = params[:key]
+    rsvp = event.rsvps.find_by_key(key)
+    if !rsvp.nil?
+      rsvp.event_user_datum.update(:attended => true)
+    end
+    head :ok, :content_type => 'text/html'
   end
 
   private
