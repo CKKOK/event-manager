@@ -12,9 +12,12 @@ Rails.application.routes.draw do
   
   get 'events/:event_id/rsvps/export', :to => 'rsvps#export', :as => 'export_event_rsvps'
   get 'events/:event_id/rsvps/edit', :to => 'rsvps#edit', :as => 'edit_user_event_rsvp_list'
+  get 'events/:event_id/attendance', :to => 'events#attendance', :as => 'event_attendance_list'
   get 'users/:user_id/events/:event_id/rsvps/export', :to => 'rsvps#export', :as => 'export_user_event_rsvps'
   get 'users/:user_id/events/:event_id/rsvps/edit', :to => 'rsvps#edit'
-  
+  get 'users/:user_id/events/:event_id/attendance', :to => 'events#attendance', :as => 'user_event_attendance_list'
+  patch 'events_users_data/:id/update_attendance', :to => 'events_users_data#mark_attendance', :as => 'events_users_datum_update_attendance'
+
   resources :events do
     resources :rsvps
     resources :users
