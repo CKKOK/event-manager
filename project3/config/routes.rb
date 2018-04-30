@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get 'users/:user_id/events/:event_id/rsvps/edit', :to => 'rsvps#edit'
   get 'users/:user_id/events/:event_id/attendance', :to => 'events#attendance', :as => 'user_event_attendance_list'
   patch 'events_users_data/:id/update_attendance', :to => 'events_users_data#mark_attendance', :as => 'events_users_datum_update_attendance'
+  get 'users/:user_id/events/:event_id/attendancescanner', :to => 'events#attendance_scanner', :as => 'user_event_attendance_scanner'
   post 'events/:event_id/attendancescan', :to => 'events#attendance_scan', :as => 'event_attendance_scan'
 
   resources :events do
