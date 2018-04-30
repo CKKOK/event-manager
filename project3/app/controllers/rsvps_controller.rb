@@ -81,7 +81,7 @@ require 'bcrypt' # For encrypting the email + event_id for users without account
 require 'csv' # For exporting RSVPs as a csv file for download
 
 class RsvpsController < ApplicationController
-
+  before_action :authenticate_user!, except: [:index, :show, :edit]
   def index
     case logged_in?
       when true # ___LOGGED IN
@@ -305,4 +305,5 @@ class RsvpsController < ApplicationController
   def rsvp_update_params
     params.require(:rsvp).permit(:name, :email)
   end
+
 end

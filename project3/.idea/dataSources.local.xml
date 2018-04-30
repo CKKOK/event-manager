@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Rails project3: production" uuid="d3dd62dc-0ad4-4b5b-8c83-080d5335acc0">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <secret-storage>master_key</secret-storage>
+      <first-sync>true</first-sync>
+      <user-name>kokcheekean</user-name>
+    </data-source>
+    <data-source name="Rails project3: development" uuid="fff491d4-489c-4c46-b2c2-55999217329a">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <first-sync>true</first-sync>
+      <user-name>&lt;%= ENV[&quot;RAILSDBUSER&quot;] %&gt;</user-name>
+    </data-source>
+    <data-source name="Rails project3: test" uuid="611f435f-a54f-47c0-9503-45c0f365a005">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <first-sync>true</first-sync>
+      <user-name>&lt;%= ENV[&quot;RAILSDBUSER&quot;] %&gt;</user-name>
+    </data-source>
+  </component>
+</project>
