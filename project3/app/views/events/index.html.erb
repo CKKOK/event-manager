@@ -4,63 +4,39 @@
           <h1>Events</h1>
 
 
-<table border="solid">
-  <tr>
-    <th>DateTime</th>
-    <th>Title</th>
-    <th>Show</th>
-    <th>Edit</th>
-    <th>Destroy</th>
-    <th>RSVP List</th>
-  </tr>
-  
-  <% @events.each do |event| %>
-  <tr>
-    <td><%= event.datetime%></td>
-    <td><%= event.title%></td>
-    <td><%= link_to 'Show', user_event_path(@user, event) %></td>
-    <td><%= link_to 'Edit', edit_user_event_path(@user, event) %></td>
-    <td><%= link_to 'Destroy', event_path(event),
-        method: :delete,
-        data: { confirm: 'Are you sure?' } %>
-    </td>
-    <td><%= link_to 'View', event_rsvps_path(event) %></td>
-  </tr>
-  <% end %>
-</table>
-
-          <!-- <table class="table table-hover">
-                  <thead>
+                <table class="table table-hover">
+                    <thead>
                     <tr>
                       <th scope="col">#</th>
-                      <th scope="col">First</th>
-                      <th scope="col">Last</th>
-                      <th scope="col">Handle</th>
+                      <th scope="col">DateTime</th>
+                      <th scope="col">Title</th>
+                      <th scope="col">Show</th>
+                      <th scope="col">Edit</th>
+                      <th scope="col">Destroy</th>
+                      <th scope="col">RSVP List</th>
                     </tr>
-                  </thead>
-                  <tbody>
+                    </thead>
+                    
+                    <% @events.each do |event| %>
+                    <tbody>
                     <tr>
                       <th scope="row">1</th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
+                      <td><%= event.datetime%></td>
+                      <td><%= event.title%></td>
+                      <td><%= link_to 'Show', user_event_path(@user, event) %></td>
+                      <td><%= link_to 'Edit', edit_user_event_path(@user, event) %></td>
+                      <td><%= link_to 'Destroy', event_path(event),
+                          method: :delete,
+                          data: { confirm: 'Are you sure?' } %>
+                      </td>
+                      <td><%= link_to 'View', event_rsvps_path(event) %></td>
                     </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                      <td>@fat</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td colspan="2">Larry the Bird</td>
-                      <td>@twitter</td>
-                    </tr>
-                  </tbody>
-                </table> -->
+                    <% end %>
+                    </tbody>
+                </table>
 
-          <%= link_to 'Create Event', new_user_event_path(@user), :class => "btn btn-outline-light"%>
-          <%= link_to 'Back', user_path(@user), :class => "btn btn-outline-light" %>
+                <%= link_to 'Create Event', new_user_event_path(@user), :class => "btn btn-outline-light"%>
+                <%= link_to 'Back', user_path(@user), :class => "btn btn-outline-light" %>
         </div>
     </div>    
 </div>

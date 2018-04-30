@@ -1,19 +1,23 @@
 <div class="container">
 	
-	<h1>Welcome <%= @user.username.capitalize %>!</h1>
+	<div class="row">
+	
+		<h1>Welcome <%= @user.username.capitalize %>!</h1>
 
-		<div class="row">
+			<div class="row">
 
-			<div class="wedding-grid-item2 col-sm-8">
+				<div class="wedding-grid-item2 col-sm-9">
 
-				<%= link_to 'Create Event', new_user_event_path(@user), :class => "btn btn-outline-light" %>
+					<%= link_to 'Create Event', new_user_event_path(@user), :class => "btn btn-outline-light" %>
 
-				<%= link_to 'View Event', user_events_path(@user), :class => "btn btn-outline-light" %>
+					<%= link_to 'View Event', user_events_path(@user), :class => "btn btn-outline-light" %>
 
-				<%= link_to 'Edit Personal Details', edit_user_registration_path(@user), :class => "btn btn-outline-light" %>
+					<%= link_to 'Edit Personal Details', edit_user_registration_path(@user), :class => "btn btn-outline-light" %>
 
-				<%= link_to 'Log out', destroy_user_session_url, method: :delete, :class => "btn btn-outline-light" %>
+					<%= link_to 'Log out', destroy_user_session_url, method: :delete, :class => "btn btn-outline-light" %>
 
+				</div>
 			</div>
-		</div>
+
+	</div>
 </div>
