@@ -17,7 +17,6 @@
   }
 
   function camStart(scannerObject) {
-    scannerObject.scans = [];
 
     scannerObject.scanner = new Instascan.Scanner({
       video: document.getElementById('preview'),
@@ -25,9 +24,7 @@
     });
     
     function onDecode (content, image) {
-      // scannerObject.scans.unshift(content);
       $('#key').val(content);
-      console.log(content);
       Rails.fire($('#attendance-scanner')[0], 'submit');
     }
 
@@ -36,8 +33,9 @@
     Instascan.Camera.getCameras().then(function (cameras) {
       scannerObject.cameras = cameras;
       if (cameras.length > 0) {
-        scannerObject.activeCameraId = cameras[0].id;
-        scannerObject.scanner.start(cameras[0]);
+        var last = cameras.length - 1;
+        scannerObject.activeCameraId = cameras[last].id;
+        scannerObject.scanner.start(cameras[last]);
       } else {
         console.error('No cameras found.');
       }
