@@ -1,3 +1,79 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@mixin button-style{
+	border-bottom-left-radius: 6px;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 12px;
+}
+
+.jumbotron-fluid{
+	
+	background-image: asset-url('ben-rosett-10609-unsplash.jpg');
+	background-size: cover;
+	color:white;
+	min-height: 600px;
+	font-family: "Brush Script MT", cursive;
+
+	.btn{
+		letter-spacing:3px;
+		@include button-style;
+
+
+	}
+}
+
+p {
+	padding-top: 10px;
+}
+
+.display-4 {
+	font-size: 95px;
+}
+
+.navbar-brand {
+	width: 40px;
+	height: 40px;
+}
+
+.navbar-nav{
+	text-align: center;
+}
+
+.container {
+	display: flex;
+	justify-content: flex-end;
+	text-align: center;
+	margin: 0 auto;
+	color: white;
+	padding-top: 210px;
+	flex-wrap: wrap;
+}
+
+#page1 {
+	height: 950px;
+}
+
+#page2 {
+	height: 950px;
+	background-image: asset-url('anna-utochkina-570935-unsplash.jpg');
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+
+#page3 {
+	height: 950px;
+	background-image: asset-url('pedro-de-sousa-391080-unsplash.jpg');
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+
+h10 {
+	font-family: "Gloria Hallelujah", cursive;
+	font-size: 50px;
+
+}
+
+
+

@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2018_04_23_065520) do
   create_table "event_user_data", force: :cascade do |t|
     t.bigint "rsvp_id"
     t.text "relation"
-    t.text "user_role"
+    t.text "user_role", default: "guest"
     t.text "attending"
     t.text "diet"
     t.integer "additional_persons"

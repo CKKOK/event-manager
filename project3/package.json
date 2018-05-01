@@ -1,5 +1,7 @@
 {
   "name": "project3",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "startbootstrap-agency": "^4.0.0-beta"
+  }
 }
