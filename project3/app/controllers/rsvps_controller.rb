@@ -216,7 +216,8 @@ class RsvpsController < ApplicationController
               @rsvp = @event.rsvps.where(:email => current_user[:email]).first
               @event_user_datum = @rsvp.event_user_datum
               #the name of the creater of the event
-              @owner = @event.users.find_by_sql("SELECT username FROM users INNER JOIN rsvps ON users.id = rsvps.user_id INNER JOIN event_user_data ON rsvps.id = event_user_data.rsvp_id INNER JOIN events ON rsvps.event_id = events.id WHERE event_user_data.user_role = 'owner' AND events.id = #{params[:event_id]}")
+              #@owner = @event.users.find_by_sql("SELECT username FROM users INNER JOIN rsvps ON users.id = rsvps.user_id INNER JOIN event_user_data ON rsvps.id = event_user_data.rsvp_id INNER JOIN events ON rsvps.event_id = events.id WHERE event_user_data.user_role = 'owner' AND events.id = #{params[:event_id]}")
+              @owner = @event.users.where(event_user_data: EventUserDatum.where(user_role: 'owner')).first
             else # ___IS NEITHER OWNER NOR GUEST
               redirect_to user_events_path(current_user)
               return
@@ -233,7 +234,7 @@ class RsvpsController < ApplicationController
               return
             else # ___KEY IS VALID (i.e. USER DOES NOT EXIST IN SYSTEM YET)
               @user_role = :guest
-              @owner = @rsvp.event.users.where(event_user_data: EventUserDatum.where(user_role: 'owner')).first.username
+              @owner = @rsvp.event.users.where(event_user_data: EventUserDatum.where(user_role: 'owner')).first
               @event_user_datum = @rsvp.event_user_datum
             end
           end

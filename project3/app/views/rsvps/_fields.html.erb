@@ -1,11 +1,13 @@
 <fieldset>
     <%= fields_for :rsvp do |f| %>
+        <div class="form-group row">
         <%= f.hidden_field :event_id, value: @event[:id], index: index %>
 
-        <%= f.label :name, index: index %>: 
-        <%= f.text_field :name, index: index %>
+        <%= f.label :name, 'Name: ', index: index, :class => 'col-sm-1 col-form-label' %>
+        <div class="col-sm-4"> <%= f.text_field :name, index: index, :class => 'form-control' %> </div>
 
-        <%= f.label :email, index: index %>: 
-        <%= f.email_field :email, index: index %>
+        <%= f.label :email, 'Email: ', index: index, :class => 'col-sm-1 col-form-label' %>
+        <div class="col-sm-4"> <%= f.email_field :email, index: index, :class => 'form-control' %> </div>
+        </div>
     <% end %>
 </fieldset>

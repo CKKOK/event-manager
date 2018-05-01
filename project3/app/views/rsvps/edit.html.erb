@@ -1,72 +1,77 @@
+<div style="width:100%;color:white;padding-top:3em;padding-left:10%;padding-right:10%">
 <% if @user_role == :owner %>
-    <h1>Invitation List</h1>
-    <% @rsvps.each do |rsvp| %>
-        <%= form_for rsvp, url: user_event_rsvp_path(@user, @event, rsvp), :remote => true, method: :patch do |f| %>
-            <%= f.label :name %>: <%= f.text_field :name %> <%= f.label :email %>: <%= f.text_field :email, :readonly => true %> <%= f.submit 'Update'%>
+        <h1>Invitation List</h1>
+        <% @rsvps.each do |rsvp| %>
+            <%= form_for rsvp, url: user_event_rsvp_path(@user, @event, rsvp), :remote => true, method: :patch, :class => 'form-inline' do |f| %>
+                <div class="form-group row">
+                    <%= f.label :name, 'Name: ', :class => 'col-sm-1 col-form-label' %> <div class="col-sm-4"> <%= f.text_field :name, :class => 'form-control' %> </div> <%= f.label :email, 'Email: ', :class => 'col-sm-1 col-form-label' %> <div class="col-sm-4"> <%= f.text_field :email, :readonly => true, :class => 'form-control' %> </div> <%= f.submit 'Update', :class => 'btn'%>
+                </div>
+            <% end %>
         <% end %>
-    <% end %>
-    <%= form_tag event_rsvps_path do %>
-        <%= render 'fields', index: 0 %>
+        <%= form_tag event_rsvps_path do %>
+            <%= render 'fields', index: 0 %>
 
-        <%=
-            button_tag 'Add invitation',
-            type: 'button',
-            id: 'add-invitation',
-            data: { fields: render('fields', index: '__INDEX__').gsub('\n', '') }
-        %>
-        <%= submit_tag 'Submit' %>
-    <% end %>
+            <%=
+                button_tag 'Add invitation',
+                type: 'button',
+                id: 'add-invitation',
+                data: { fields: render('fields', index: '__INDEX__').gsub('\n', '') },
+                class: 'btn btn-outline-light'
+            %>
+            <%= submit_tag 'Submit', :class => 'btn btn-outline-light' %>
+            <%= link_to 'Back to Events', user_events_path(@user), :class => "btn btn-outline-light" %>
+        <% end %>
 <% elsif @user_role == :guest %>
     <h1>RSVP from <%= @rsvp.name %> for <%= @rsvp.event.title %></h1>
     <% if params[:attending] == 'yes'%>
         <%= form_for @event_user_datum, url:events_users_datum_path(@event_user_datum), method: :patch do |form| %>
             <%= form.hidden_field :attending, value: 'Yes' %>
 
-            <p>
-                <%= form.label :relation, "Relationship with #{@owner[0].username}" %><br>
-                <%= form.text_field :relation %>
-            </p>
+            <div class="form-group row">
+                <%= form.label :relation, "Relationship with #{@owner.username}", :class => 'col-sm-4 col-form-label' %>
+                <div class="col-sm-8"> <%= form.text_field :relation, :class => 'form-control' %> </div>
+            </div>
 
-            <p>
-                <%= form.label :diet, 'Dietary Needs' %><br>
-                <%= form.text_field :diet %>
-            </p>
+            <div class="form-group row">
+                <%= form.label :diet, 'Dietary Needs', :class => 'col-sm-4 col-form-label' %>
+                <div class="col-sm-8"><%= form.text_field :diet, :class => 'form-control' %></div>
+            </div>
 
-            <p>
-                <%= form.label :additional_persons, 'Number of Additional Persons' %><br>
-                <%= form.text_field :additional_persons %>
-            </p>
+            <div class="form-group row">
+                <%= form.label :additional_persons, 'Number of Additional Persons', :class => 'col-sm-4 col-form-label' %>
+                <div class="col-sm-8"><%= form.text_field :additional_persons, :class => 'form-control' %></div>
+            </div>
 
-            <p>
-                <%= form.label :num_babies, 'Number of Babies' %><br>
-                <%= form.text_field :num_babies %>
-            </p>
+            <div class="form-group row">
+                <%= form.label :num_babies, 'Number of Babies', :class => 'col-sm-4 col-form-label' %>
+                <div class="col-sm-8"><%= form.text_field :num_babies, :class => 'form-control' %></div>
+            </div>
 
-            <p>
-                <%= form.label :num_toddlers, 'Number of Toddlers' %><br>
-                <%= form.text_field :num_toddlers %>
-            </p>
+            <div class="form-group row">
+                <%= form.label :num_toddlers, 'Number of Toddlers', :class => 'col-sm-4 col-form-label' %>
+                <div class="col-sm-8"><%= form.text_field :num_toddlers, :class => 'form-control' %></div>
+            </div>
 
-            <p>
-                <%= form.label :require_carpark, 'Parking lot needed?' %><br>
-                <%= form.select :require_carpark, options_for_select(['Yes', 'No']) %>
-            </p>
+            <div class="form-group row">
+                <%= form.label :require_carpark, 'Parking lot needed?', :class => 'col-sm-4 col-form-label' %>
+                <div class="col-sm-8"><%= form.select :require_carpark, options_for_select(['Yes', 'No']), {}, {:class => 'form-control'} %></div>
+            </div>
 
-            <p>
-                <%= form.submit 'Update my response'%>
-            </p>
+            <div class="form-group row">
+                <%= form.submit 'Update my response', :class => 'btn btn-outline-light'%>
+            </div>
         <% end %>
     <% else %>
         <%= form_for @event_user_datum, url:events_users_datum_path(@event_user_datum), method: :patch do |form| %>
             <%= form.hidden_field :attending, value: 'No' %>
-            <p>
-                <%= form.label :message, "Leave a message for #{@owner[0].username}? (Optional)" %><br>
-                <%= form.text_area :message %>
-            </p>
+            <div class="form-group">
+                <%= form.label :message, "Leave a message for #{@owner.username}? (Optional)", :class => 'col-sm-12 col-form-label' %><br>
+                <%= form.text_area :message, :class => 'form-control' %>
+            </div>
 
-            <p>
-                <%= form.submit 'Update my response'%>
-            </p>
+            <%= form.submit 'Update my response', :class => 'btn btn-outline-light'%>
+
         <% end %>
     <% end %>
 <% end %>
+</div>

@@ -1,10 +1,36 @@
-<h1>Attendance List</h1>
-<p class="attendance-statistics">Attendance: <span class="attendance-current">0</span> / <span class="attendance-total">0</span>, <span class="attendance-percentage">0</span>% present</p>
-<% @event_user_data.each do |e| %>
-	<%= form_for e, url: events_users_datum_update_attendance_path(e), :remote => true, method: :patch do |f| %>
-		Name: <%= e.rsvp.user ? e.rsvp.user.username : e.rsvp.name %>, <%= f.label :attended %>: <%= f.check_box :attended, :onchange => "Rails.fire(this.form,'submit'); if (this.checked) {UI.attendanceCurrent.update(1)} else {UI.attendanceCurrent.update(-1)};", :class => "attended_checkbox" %>
-	<% end %>
-<% end %>
+<style>
+	body {
+		background-color: black;
+		background-image: none;
+	}
+</style>
+<div style="text-align:center;color:white;padding-top:2em">
+	<h1>Attendance List</h1>
+	<p class="attendance-statistics">Attendance: <span class="attendance-current">0</span> / <span class="attendance-total">0</span>, <span class="attendance-percentage">0</span>% present</p>
+</div>
+<div class="container">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Name</th>
+				<th scope="col">Arrived</th>
+			</tr>
+		</thead>
+		<tbody>
+		<% @event_user_data.each_with_index do |e, i| %>
+			<%= form_for e, url: events_users_datum_update_attendance_path(e), :remote => true, method: :patch do |f| %>
+			<tr>
+				<th scope="row"><%= i+1 %></th>
+				<td><%= e.rsvp.user ? e.rsvp.user.username : e.rsvp.name %></td>
+				<td><%= f.check_box :attended, :onchange => "Rails.fire(this.form,'submit'); if (this.checked) {UI.attendanceCurrent.update(1)} else {UI.attendanceCurrent.update(-1)};", :class => "attended_checkbox" %></td>
+			</tr>
+			<% end %>
+		<% end %>
+		</tbody>
+	</table>
+</div>
+
 <script>
 	function UI() {
 		

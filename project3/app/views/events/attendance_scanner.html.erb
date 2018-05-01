@@ -1,23 +1,28 @@
 <style>
   html, body {
     height: 100%;
+    background: black;
   }
 
   #preview {
     width: 100%;
   }
+
+  .wahlanthisbootstraplayoutcmilah {
+    margin: 0 auto;
+    width: 100%;
+  }
 </style>
+  
+
 <%= form_tag(event_attendance_scan_path(@event), id: "attendance-scanner", remote: true, method: :post) do %>
 	<%= hidden_field_tag :key %>
 <% end %>
-
-<div class="preview-container">
-	<video id="preview"></video>
+<div class="wahlanthisbootstraplayoutcmilah">
+  <video id="preview"></video>
 </div>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/3.3.3/adapter.min.js"></script>
-<script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
-<script>
+<script defer>
   var QRScanner = {};
 
   function camStart() {
@@ -30,7 +35,7 @@
     function onDecode (content, image) {
       $('#key').val(content);
       Rails.fire($('#attendance-scanner')[0], 'submit');
-    }
+    };
 
     QRScanner.scanner.addListener('scan', onDecode);
     
@@ -62,5 +67,5 @@
 
   };
 
-  camStart();
+  $(document).on("turbolinks:load", camStart);
 </script>

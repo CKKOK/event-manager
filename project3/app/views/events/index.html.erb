@@ -13,7 +13,9 @@
                       <th scope="col">Show</th>
                       <th scope="col">Edit</th>
                       <th scope="col">Destroy</th>
-                      <th scope="col">RSVP List</th>
+                      <th scope="col">RSVPs</th>
+                      <th scope="col">Start</th>
+                      <th scope="col">Scanner</th>
                     </tr>
                     </thead>
                     
@@ -30,6 +32,8 @@
                             data: { confirm: 'Are you sure?' } %>
                         </td>
                         <td><%= link_to 'View', event_rsvps_path(event.id) %></td>
+                        <td><%= link_to 'Start', user_event_attendance_list_path(current_user, event) %></td>
+                        <td><%= link_to 'Scan', user_event_attendance_scanner_path(current_user, event) %></td>
                       </tr>
                     <% end %>
                     </tbody>
