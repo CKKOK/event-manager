@@ -22,7 +22,7 @@
   <video id="preview"></video>
 </div>
 
-<script defer>
+<script>
   var QRScanner = {};
 
   function camStart() {
@@ -67,5 +67,5 @@
 
   };
 
-  $(document).on("turbolinks:load", camStart);
+  camStart();
 </script>
