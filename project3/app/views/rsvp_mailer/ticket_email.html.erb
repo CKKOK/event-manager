@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <style>
+        table {
+            border-width: 0;
+            border-style: none;
+            border-color: #0000ff;
+            border-collapse: collapse;
+        }
+
+        td {
+            border-left: solid 10px #000;
+            padding: 0; 
+            margin: 0; 
+            width: 0px; 
+            height: 10px; 
+        }
+
+        td.black { border-color: #000; }
+        td.white { border-color: #fff; }
+    </style>
+</head>
+<body>
+    <h1>Thank you, <%= @rsvp[:name] %>!</h1>
+    <p>
+        Please present this email at the registration desk. The QR code below will be your ticket to the event. See you there!
+    </p>
+    <%= raw @qr.as_html %>
+</body>
+</html>

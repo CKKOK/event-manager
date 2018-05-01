@@ -3,7 +3,7 @@ class CreateEventUserData < ActiveRecord::Migration[5.2]
     create_table :event_user_data do |t|
       t.references :rsvp, foreign_key: true
       t.text :relation
-      t.text :user_role
+      t.text :user_role, :default => 'guest'
       t.text :attending
       t.text :diet
       t.integer :additional_persons

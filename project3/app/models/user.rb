@@ -7,5 +7,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :rsvps
+  has_many :event_user_data, through: :rsvps
   has_and_belongs_to_many :events
 end

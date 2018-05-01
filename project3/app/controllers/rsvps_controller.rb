@@ -79,6 +79,7 @@
 
 require 'bcrypt' # For encrypting the email + event_id for users without accounts
 require 'csv' # For exporting RSVPs as a csv file for download
+require 'rqrcode'
 
 class RsvpsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :edit]
@@ -179,20 +180,15 @@ class RsvpsController < ApplicationController
       rsvp.values.any? &:blank?
     end
     rsvps.each { |rsvp| 
+      tmpstring = rsvp[:email] + rsvp[:event_id].to_s
+      rsvp[:key] = BCrypt::Password.create(tmpstring).to_s
+      tmp = Rsvp.create! rsvp
+      tmp_event_user_datum = tmp.create_event_user_datum(user_role: :guest)
       if user_email_exists?(rsvp[:email]) 
-        rsvp[:key] = nil
         user = User.find_by_email(rsvp[:email])
-        tmp = Rsvp.create! rsvp
         tmp.user = user
-        tmp_event_user_datum = tmp.create_event_user_datum(user_role: :guest)
-        tmp_event_user_datum.save
-      else
-        tmpstring = rsvp[:email] + rsvp[:event_id].to_s
-        rsvp[:key] = BCrypt::Password.create(tmpstring).to_s
-        tmp = Rsvp.create! rsvp
-        tmp_event_user_datum = tmp.create_event_user_datum(user_role: :guest)
-        tmp_event_user_datum.save
       end
+      tmp_event_user_datum.save
       RsvpMailer.with(sender: current_user.username, rsvp: tmp).rsvp_email.deliver_later
     }
     if rsvps.length > 0
@@ -232,7 +228,7 @@ class RsvpsController < ApplicationController
               return
             else # ___KEY IS VALID (i.e. USER DOES NOT EXIST IN SYSTEM YET)
               @user_role = :guest
-              @owner = @rsvp.event.rsvps.where(event_user_datum: EventUserDatum.where(user_role: 'owner')).first.name
+              @owner = @rsvp.event.users.where(event_user_data: EventUserDatum.where(user_role: 'owner')).first.username
               @event_user_datum = @rsvp.event_user_datum
             end
           end
@@ -242,15 +238,7 @@ class RsvpsController < ApplicationController
   def update
     # Updates only a single record. Deal with this via AJAX?
     rsvp = Rsvp.find(params[:id])
-    # if user_email_exists?(params[:email])
-    #   params[:key] = nil
-    #   # send email out
-    # else
-    #   params[:key] = BCrypt::Password.new(params[:email] << params[:event_id].to_s)
-    #   # send email out
-    # end
     rsvp.update(rsvp_update_params)
-    # redirect_to root_path
     head :ok, :content_type => 'text/html'
   end
 
@@ -284,14 +272,14 @@ class RsvpsController < ApplicationController
     if event.nil? || user.nil?
       return false
     end
-    event.users.where(rsvps: EventUserDatum.where(user_role: "owner")).first == user
+    event.users.where(event_user_data: EventUserDatum.where(user_role: "owner")).first == user
   end
   
   def is_invited?(event, user)
     if event.nil? || user.nil?
       return false
     end
-    event.users.where(rsvps: EventUserDatum.where(user_role: "guest")).first == user
+    event.users.where(event_user_data: EventUserDatum.where(user_role: "guest")).first == user
   end
 
   def key
