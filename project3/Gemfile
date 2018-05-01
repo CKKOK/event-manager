@@ -9,7 +9,7 @@ gem 'rqrcode'
 # User authentication
 gem 'devise'
 
-gem 'wdm' # (For running a Rails server on Windows)
+# gem 'wdm' # (For running a Rails server on Windows)
 
 # For front-end styling
 gem 'bootstrap'
