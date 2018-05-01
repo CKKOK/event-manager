@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function(){
+$(document).ready(function(){
     var invitation_index = 1;
 
     function addInvitation(e) {
