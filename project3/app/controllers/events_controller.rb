@@ -63,10 +63,7 @@ class EventsController < ApplicationController
 
   def attendance
     @event = Event.find(params[:event_id])
-    @event_user_data = []
-    @event.rsvps.each do |r|
-      @event_user_data << r.event_user_datum
-    end
+    @event_user_data = @event.event_user_data.where(:attending => 'Yes')
   end
 
   def attendance_scanner
