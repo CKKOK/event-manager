@@ -18,5 +18,7 @@ module Project3
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
     BCrypt::Engine.cost = 5
+
+    config.force_ssl = true
   end
 end
