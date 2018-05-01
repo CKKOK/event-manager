@@ -23,7 +23,7 @@
             <%= form.hidden_field :attending, value: 'Yes' %>
 
             <p>
-                <%= form.label :relation, "Relationship with #{@owner}" %><br>
+                <%= form.label :relation, "Relationship with #{@owner[0].username}" %><br>
                 <%= form.text_field :relation %>
             </p>
 
@@ -60,7 +60,7 @@
         <%= form_for @event_user_datum, url:events_users_datum_path(@event_user_datum), method: :patch do |form| %>
             <%= form.hidden_field :attending, value: 'No' %>
             <p>
-                <%= form.label :message, 'Leave a message? (Optional)' %><br>
+                <%= form.label :message, "Leave a message for #{@owner[0].username}? (Optional)" %><br>
                 <%= form.text_area :message %>
             </p>
 

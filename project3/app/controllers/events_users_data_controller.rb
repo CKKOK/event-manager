@@ -9,7 +9,8 @@ class EventsUsersDataController < ApplicationController
     if event_user_datum.attending === "Yes"
       RsvpMailer.ticket_email(event_user_datum.rsvp).deliver_later
     end
-    redirect_to root_path
+    #redirect_to root_path
+    redirect_to user_events_path(current_user.id)
   end
 
   def mark_attendance

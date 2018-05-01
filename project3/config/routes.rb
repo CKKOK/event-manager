@@ -22,7 +22,9 @@ Rails.application.routes.draw do
   post 'events/:event_id/attendancescan', :to => 'events#attendance_scan', :as => 'event_attendance_scan'
 
   resources :events do
-    resources :rsvps
+    resources :rsvps do
+      resources :events_users_data
+    end
     resources :users
   end
 
