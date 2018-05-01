@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   get 'users/:user_id/events/:event_id/rsvps/export', :to => 'rsvps#export', :as => 'export_user_event_rsvps'
 
   resources :events do
-    resources :rsvps
+    resources :rsvps do
+      resources :events_users_data
+    end
     resources :users
   end
 

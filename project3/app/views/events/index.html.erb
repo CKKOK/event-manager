@@ -14,13 +14,13 @@
   <tr>
     <td><%= event.datetime%></td>
     <td><%= event.title%></td>
-    <td><%= link_to 'Show', user_event_path(@user, event) %></td>
-    <td><%= link_to 'Edit', edit_user_event_path(@user, event) %></td>
-    <td><%= link_to 'Destroy', event_path(event),
+    <td><%= link_to 'Show', user_event_path(@user, event.id) %></td>
+    <td><%= link_to 'Edit', edit_user_event_path(@user, event.id) %></td>
+    <td><%= link_to 'Destroy', event_path(event.id),
         method: :delete,
         data: { confirm: 'Are you sure?' } %>
     </td>
-    <td><%= link_to 'View', event_rsvps_path(event) %></td>
+    <td><%= link_to 'View', event_rsvps_path(event.id) %></td>
   </tr>
   <% end %>
 </table>
@@ -34,11 +34,19 @@
     <th>My RSVP</th>
   </tr>
   
-  <% @invited_events.each do |event| %>
+  <% @max_length.times do |n| %>
   <tr>
-    <td><%= event.datetime%></td>
-    <td><%= event.title%></td>
-    <td>Link to Event_User_Data</td>
+    <td><%= @invited_events[n].try(:datetime) %></td>
+    <td><%= @invited_events[n].try(:title) %></td>
+    <% if @event_rsvp[n].try(:attending).blank? %>
+      <td><%= link_to 'Going', edit_event_rsvp_path(@invited_events[n].try(:id), @event_rsvp[n].try(:rsvp_id), attending: "yes") %> <%= link_to 'NotGoing', edit_event_rsvp_path(@invited_events[n].try(:id), @event_rsvp[n].try(:rsvp_id), attending: "no") %></td>
+    <% elsif @event_rsvp[n].try(:attending) == 'Yes' %>
+      <td><%= @event_rsvp[n].try(:attending) %></td>
+      <td><%= link_to 'Change RSVP?', edit_event_rsvp_path(@invited_events[n].try(:id), @event_rsvp[n].try(:rsvp_id), attending: "no") %></td>
+    <% else %>
+      <td><%= @event_rsvp[n].try(:attending) %></td>
+      <td><%= link_to 'Change RSVP?', edit_event_rsvp_path(@invited_events[n].try(:id), @event_rsvp[n].try(:rsvp_id), attending: "yes") %></td>
+    <% end %>
   </tr>
   <% end %>
 </table>

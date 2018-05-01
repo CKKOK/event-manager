@@ -96,8 +96,8 @@ class RsvpsController < ApplicationController
           when true # ___IS OWNER
             @user_role = :owner
             @rsvps = @event.rsvps
-          when false
-            if is_invited?(@event, current_user) # ___IS GUEST
+          when false # ___IS GUEST
+            if is_invited?(@event, current_user) 
               rsvp = @event.rsvps.find_by_email(current_user.email)
               redirect_to edit_user_event_rsvp_path(current_user, @event, rsvp)
               return
@@ -138,6 +138,7 @@ class RsvpsController < ApplicationController
           when false
             if is_invited?(@event, current_user) # ___IS GUEST
               @rsvp = Rsvp.find_by_id(params[:id])
+              #@user_event_datum = EventUserDatum.find_by_sql("SELECT * FROM event_user_data INNER JOIN rsvps ON event_user_data.rsvp_id = rsvps.id INNER JOIN events ON rsvps.event_id = events.id WHERE event_user_data.user_role = 'guest' AND rsvps.email = '#{current_user.email}'")
               if @rsvp[:email] == current_user[:email] # Check that the rsvp is indeed for the user
                 @user_role = :guest
               else
@@ -179,15 +180,16 @@ class RsvpsController < ApplicationController
       rsvp.values.any? &:blank?
     end
     rsvps.each { |rsvp| 
-      if user_email_exists?(rsvp[:email]) 
+      if user_email_exists?(rsvp[:email]) # ___invited user is a perm user
         rsvp[:key] = nil
         user = User.find_by_email(rsvp[:email])
+        @event.users << user # ___creating invited user relation with event
         tmp = Rsvp.create! rsvp
-        tmp.user_id = user.id
+        tmp.user_id = user.id # ___creating user id in Rsvp model
         tmp.save
-        tmp_event_user_datum = tmp.create_event_user_datum(user_role: :guest)
+        tmp_event_user_datum = tmp.create_event_user_datum(user_role: :guest) # ___creating user_role guest in event_user_data model
         tmp_event_user_datum.save
-      else
+      else # ___invited user is a temp user
         tmpstring = rsvp[:email] + rsvp[:event_id].to_s
         rsvp[:key] = BCrypt::Password.create(tmpstring).to_s
         tmp = Rsvp.create! rsvp
@@ -211,11 +213,13 @@ class RsvpsController < ApplicationController
           when true # ___IS OWNER
             @user_role = :owner
             @rsvps = Rsvp.where(:event_id => @event[:id])
-          when false
-            if is_invited?(@event, current_user) # ___IS GUEST
+          when false # ___IS GUEST
+            if is_invited?(@event, current_user) 
               @user_role = :guest
               @rsvp = @event.rsvps.where(:email => current_user[:email]).first
               @event_user_datum = @rsvp.event_user_datum
+              #the name of the creater of the event
+              @owner = @event.users.find_by_sql("SELECT username FROM users INNER JOIN rsvps ON users.id = rsvps.user_id INNER JOIN event_user_data ON rsvps.id = event_user_data.rsvp_id INNER JOIN events ON rsvps.event_id = events.id WHERE event_user_data.user_role = 'owner' AND events.id = #{params[:event_id]}")
             else # ___IS NEITHER OWNER NOR GUEST
               redirect_to user_events_path(current_user)
               return
@@ -282,14 +286,14 @@ class RsvpsController < ApplicationController
     if event.nil? || user.nil?
       return false
     end
-    event.users.where(rsvps: EventUserDatum.where(user_role: "owner")).first == user
+    event.users.where(rsvps: event.event_user_data.where(user_role: "owner")).first == user
   end
   
   def is_invited?(event, user)
     if event.nil? || user.nil?
       return false
     end
-    event.users.where(rsvps: EventUserDatum.where(user_role: "guest")).first == user
+    event.users.where(rsvps: event.event_user_data.where(user_role: "guest")).first == user
   end
 
   def key

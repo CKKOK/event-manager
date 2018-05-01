@@ -78,9 +78,9 @@ ActiveRecord::Schema.define(version: 2018_04_23_065520) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "event_user_data", "rsvps"
-  add_foreign_key "events_users", "events"
-  add_foreign_key "events_users", "users"
-  add_foreign_key "rsvps", "events"
-  add_foreign_key "rsvps", "users"
+  add_foreign_key "event_user_data", "rsvps", on_delete: :cascade
+  add_foreign_key "events_users", "events", on_delete: :cascade
+  add_foreign_key "events_users", "users", on_delete: :cascade
+  add_foreign_key "rsvps", "events", on_delete: :cascade
+  add_foreign_key "rsvps", "users", on_delete: :cascade
 end

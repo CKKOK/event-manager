@@ -5,7 +5,7 @@ class EventsUsersDataController < ApplicationController
   def update
     @event_user_datum = EventUserDatum.find(params[:id])
     @event_user_datum.update(event_user_datum_params)
-    redirect_to root_path
+    redirect_to user_events_path(current_user.id)
   end
 
   private
