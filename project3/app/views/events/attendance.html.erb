@@ -1,7 +1,48 @@
 <h1>Attendance List</h1>
+<p class="attendance-statistics">Attendance: <span class="attendance-current">0</span> / <span class="attendance-total">0</span>, <span class="attendance-percentage">0</span>% present</p>
 <% @event_user_data.each do |e| %>
 	<%= form_for e, url: events_users_datum_update_attendance_path(e), :remote => true, method: :patch do |f| %>
-		Name: <%= e.rsvp.user ? e.rsvp.user.username : e.rsvp.name %>, <%= f.label :attended %>: <%= f.check_box :attended, :onchange => "Rails.fire(this.form,'submit')" %>
+		Name: <%= e.rsvp.user ? e.rsvp.user.username : e.rsvp.name %>, <%= f.label :attended %>: <%= f.check_box :attended, :onchange => "Rails.fire(this.form,'submit'); if (this.checked) {UI.attendanceCurrent.update(1)} else {UI.attendanceCurrent.update(-1)};", :class => "attended_checkbox" %>
 	<% end %>
 <% end %>
+<script>
+	function UI() {
+		
+		this.createUIElement = function (name, DOMElement, updateFunc) {
+			this[name] = {};
+			this[name].element = DOMElement;
+			this[name].value = 0;
+			this[name].update = updateFunc;
+		};
+	
+	};
 
+	function addInt (delta) {
+		this.value = parseInt(this.value) + delta;
+		this.element.innerText = this.value;
+		UI.attendancePercentage.update();
+	};
+
+	function calcAttendancePercentage() {
+		total = UI.attendanceTotal.value;
+		if (total === 0 ) return 0;
+		current = UI.attendanceCurrent.value;
+		this.value = +(Math.round((current / total) + "e+2") + "e-2") * 100;
+		this.element.innerText = this.value;
+	};
+
+	UI = new UI();
+	UI.createUIElement('attendanceCurrent', document.querySelector('.attendance-current'), addInt);
+	UI.createUIElement('attendanceTotal', document.querySelector('.attendance-total'), addInt);
+	UI.createUIElement('attendancePercentage', document.querySelector('.attendance-percentage'), calcAttendancePercentage);
+	
+	var forms = document.querySelectorAll('form[id^="edit_event_user_datum"]')
+	
+	forms.forEach(function (form) {
+		UI.attendanceTotal.update(1)
+		if (form.children[4].checked) {
+			UI.attendanceCurrent.update(1)
+		};
+	});
+
+</script>
