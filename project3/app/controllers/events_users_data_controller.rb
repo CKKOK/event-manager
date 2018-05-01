@@ -6,6 +6,9 @@ class EventsUsersDataController < ApplicationController
   def update
     event_user_datum = EventUserDatum.find(params[:id])
     event_user_datum.update(event_user_datum_params)
+    if event_user_datum.attending === "Yes"
+      RsvpMailer.ticket_email(event_user_datum.rsvp).deliver_later
+    end
     redirect_to root_path
   end
 

@@ -71,7 +71,18 @@ class EventsController < ApplicationController
 
   def attendance_scanner
     @event = Event.find(params[:event_id])
-    
+  end
+
+  def attendance_scan
+    event = Event.find(params[:event_id])
+    key = params[:key]
+    rsvp = event.rsvps.find_by_key(key)
+    if !rsvp.nil?
+      rsvp.event_user_datum.update(:attended => true)
+    end
+    id = "edit_event_user_datum_" + rsvp.event_user_datum.id.to_s
+    ActionCable.server.broadcast 'attendance_update_channel', { update: { id: id, attended: true } }
+    head :ok, :content_type => 'text/html'
   end
 
   private

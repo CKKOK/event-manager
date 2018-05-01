@@ -29,7 +29,8 @@ event.users << user
 rsvp_1 = Rsvp.create(
   event_id: event.id,
   name: user.username,
-  email: user.email
+  email: user.email,
+  key: BCrypt::Password.create(event.id.to_s + user.email)
 )
 rsvp_1.user = user
 rsvp_1.save
@@ -42,7 +43,7 @@ event_user_datum_1.save!
 
 name = "Princess Caroline"
 email = "mmm@meow.com"
-key = BCrypt::Password.create(name + email)
+key = BCrypt::Password.create(event.id.to_s + email)
 
 rsvp_2 = Rsvp.new(
   event_id: event.id,

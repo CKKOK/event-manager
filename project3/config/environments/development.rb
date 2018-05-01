@@ -77,4 +77,12 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  if ENV["SSH_CLIENT"].nil?
+    config.web_console.whitelisted_ips = '0.0.0.0'
+  else
+    config.web_console.whitelisted_ips = ENV["SSH_CLIENT"].split(" ")[0]
+  end
+
+  config.action_cable.url = "ws://localhost:3000/cable"
+
 end
