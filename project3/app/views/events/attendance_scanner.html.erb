@@ -1,3 +1,12 @@
+<style>
+  html, body {
+    height: 100%;
+  }
+
+  #preview {
+    width: 100%;
+  }
+</style>
 <%= form_tag(event_attendance_scan_path(@event), id: "attendance-scanner", remote: true, method: :post) do %>
 	<%= hidden_field_tag :key %>
 <% end %>
