@@ -19,13 +19,11 @@
 		</thead>
 		<tbody>
 		<% @event_user_data.each_with_index do |e, i| %>
-			<%= form_for e, url: events_users_datum_update_attendance_path(e), :remote => true, method: :patch do |f| %>
 			<tr>
 				<th scope="row"><%= i+1 %></th>
 				<td><%= e.rsvp.user ? e.rsvp.user.username : e.rsvp.name %></td>
-				<td><%= f.check_box :attended, :onchange => "Rails.fire(this.form,'submit'); if (this.checked) {UI.attendanceCurrent.update(1)} else {UI.attendanceCurrent.update(-1)};", :class => "attended_checkbox" %></td>
+				<td><%= form_for e, url: events_users_datum_update_attendance_path(e), :remote => true, method: :patch do |f| %><%= f.check_box :attended, :onchange => "Rails.fire(this.form,'submit'); if (this.checked) {UI.attendanceCurrent.update(1)} else {UI.attendanceCurrent.update(-1)};", :class => "attended_checkbox" %><% end %></td>
 			</tr>
-			<% end %>
 		<% end %>
 		</tbody>
 	</table>
