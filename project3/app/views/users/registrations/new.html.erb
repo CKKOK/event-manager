@@ -1,10 +1,10 @@
 <head>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
 </head>
-<div class="container">
+<div class="container_registration_new">
     <div class="row">
         <div class="registration-grid-item1 col-md-12">
-            <h2>Sign Up</h2>
+            <h23>Sign Up</h23>
 
             <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
               <%= devise_error_messages! %>
@@ -36,6 +36,8 @@
                 <%= f.submit "Sign up", :class =>"btn btn-outline-light" %>
               </div>
               <% end %>
+
+              <%= link_to 'Back', :back, :class => "btn btn-outline-light" %>
         </div>      
     </div>      
 </div>

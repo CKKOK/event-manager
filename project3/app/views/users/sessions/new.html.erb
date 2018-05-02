@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container_sessions">
   <div class="row">
     <div class="sessions-grid-item1 col-md-12">
-        <h2>Log In</h2>
+        <h20>Log In</h20>
 
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="form-group">
@@ -26,7 +26,7 @@
           </div>
         <% end %>
 
-        <%= link_to "Forgot your password?", new_password_path(resource_name), :class =>"btn btn-outline-info" %><br />
+        <%= link_to "Forgot your password?", new_password_path(resource_name), :class =>"btn btn-outline-dark" %><br />
 
     </div>
   </div>  

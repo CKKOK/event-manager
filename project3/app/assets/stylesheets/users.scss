@@ -2,13 +2,73 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.container {
+.container_registration_new {
 	display: flex;
 	justify-content: flex-end;
+	text-align: center;
 	margin: 0 auto;
+	color: white;
+	padding-top: 210px;
+	flex-wrap: wrap;
+	padding-right: 400px;
 
 }
 
-h2 {
+.container_foobar {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	margin: 0 auto;
+	color: white;
+	padding-top: 180px;
+	padding-left: 960px;
+
+}
+
+.container_foobar2 {
+	display: flex;
+	flex-wrap: wrap;
+	padding-left: 960px;
+}
+
+.container_sessions {
+	display: flex;
+	justify-content: flex-end;
+	margin: 0 auto;
+	color: white;
+	padding-top: 210px;
+	text-align: center;
+	padding-right: 460px;
+	flex-wrap: wrap;
+
+}
+
+.container_sessions2 {
+	display: flex;
+	justify-content: flex-end;
+	margin: 0 auto;
+	color: white;
+	padding-top: 210px;
+	text-align: center;
+}
+
+h20 {
 	font-family: "Gloria Hallelujah", cursive;
+	font-size: 50px;
+	margin-bottom: 130px;
+}
+
+h21 {
+	font-family: "Gloria Hallelujah", cursive;
+	font-size: 50px;
+}
+
+h22 {
+	font-family: "Gloria Hallelujah", cursive;
+	font-size: 50px;
+}
+
+h23 {
+	font-family: "Gloria Hallelujah", cursive;
+	font-size: 50px;
 }

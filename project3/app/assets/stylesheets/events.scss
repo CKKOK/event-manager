@@ -2,10 +2,32 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.container {
+.container_index {
 	display: flex;
 	justify-content: flex-end;
 	margin: 0 auto;
+	color: white;
+	padding-top: 210px;
+	padding-right: 300px;
 
+}
 
+.container_new {
+	display: flex;
+	justify-content: flex-end;
+	text-align: center;
+	margin: 0 auto;
+	color: white;
+	padding-top: 210px;
+	padding-right: 300px;
+}
+
+h31 {
+	font-family: "Gloria Hallelujah", cursive;
+	font-size: 50px;
+}
+
+h32 {
+	font-family: "Gloria Hallelujah", cursive;
+	font-size: 50px;
 }

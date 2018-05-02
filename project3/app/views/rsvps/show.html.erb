@@ -1,17 +1,29 @@
-<h1>RSVP for <%= @event.title %> from <%= @rsvp.name %></h1>
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Attending</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><%= @rsvp.name %></td>
-            <td><%= @rsvp.email %></td>
-            <td><%= @event_user_datum.attending %></td>
-        </tr>
-    </tbody>
-</table>
+<div class="container_rsvps_show">
+
+    <div class="row_rsvps_show">
+
+        <div class="rsvps-grid-item3 col-sm-12">
+
+                <h1>RSVP for <%= @event.title %> from <%= @rsvp.name %></h1>
+
+                <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Attending</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td scope="row"><%= index %></td>
+                                <td scope="row"><%= @rsvp.name %></td>
+                                <td scope="row"><%= @rsvp.email %></td>
+                                <td scope="row"><%= @event_user_datum.attending %></td>
+                            </tr>
+                        </tbody>
+                </table>
+        </div>
+    </div>
+</div>

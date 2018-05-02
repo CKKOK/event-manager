@@ -1,36 +1,57 @@
-<% if @user_role == :owner %>
-    <h1>All RSVPs for <%= @event.title %></h1>
-    <table>
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Attending</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% @rsvps.each.with_index(1) do |rsvp, index| %>
-                <tr>
-                    <td><%= index %></td>
-                    <td><%= rsvp.name.titleize %></td>
-                    <td><%= rsvp.email %></td>
-                    <td><%= rsvp.event_user_datum.user_role %></td>
-                    <td><%= rsvp.event_user_datum.attending %></td>
-                </tr>
-            <% end %>
-        </tbody>
-    </table>
-    <% if @rsvps.size > 0 %>
-        <%= link_to 'Edit', edit_user_event_rsvp_list_path(@event) %><br>
-    <% else %>
-        <%= link_to 'Add', new_event_rsvp_path(@event) %><br>
-    <% end %>
-    <%= link_to 'Back', user_events_path(current_user.id) %><br>
-    <% if @user.nil? %>
-        <%= link_to 'Export as CSV', export_event_rsvps_path %>
-    <% elsif %>
-        <%= link_to 'Export as CSV', export_user_event_rsvps_path(current_user.id) %>
-    <% end %>
-<% end %>
+<div class="container_rsvps_index">
+
+    <div class="row_rsvps_index">
+
+            <div class="rsvps-grid-item1 col-sm-12">
+
+                    <% if @user_role == :owner %>
+                        <h41>All RSVPs for <%= @event.title %></h41>
+
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Role</th>
+                                    <th scope="col">Attending</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% @rsvps.each.with_index(1) do |rsvp, index| %>
+                                    <tr>
+                                        <td scope="row"><%= index %></td>
+                                        <td><%= rsvp.name.titleize %></td>
+                                        <td><%= rsvp.email %></td>
+                                        <td><%= rsvp.event_user_datum.user_role %></td>
+                                        <td><%= rsvp.event_user_datum.attending %></td>
+                                    </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+            </div>
+    </div>
+    <div class="row_rsvps_index2">
+
+            <div class="rsvps-grid-item2 col-sm-12">
+
+                        <% if @rsvps.size > 0 %>
+                            <%= link_to 'Edit', edit_user_event_rsvp_list_path(@event), :class => "btn btn-outline-light" %><br>
+                        <% else %>
+                            <%= link_to 'Add', new_event_rsvp_path(@event), :class => "btn btn-outline-light" %><br>
+                        <% end %>
+                        <%= link_to 'Back', user_events_path(current_user.id), :class => "btn btn-outline-light" %><br>
+
+                        <% if @user.nil? %>
+                            <%= link_to 'Export as CSV', export_event_rsvps_path, :class => "btn btn-outline-light" %>
+                        <% elsif %>
+                            <%= link_to 'Export as CSV', export_user_event_rsvps_path(current_user.id), :class => "btn btn-outline-light" %>
+                        <% end %>
+                    <% end %>
+
+            </div>                
+    </div>           
+</div>
+               
+                        
+
