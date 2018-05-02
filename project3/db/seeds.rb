@@ -47,6 +47,7 @@ key = BCrypt::Password.create(event.id.to_s + email)
 
 rsvp_2 = Rsvp.new(
   event_id: event.id,
+  attending: "Yes",
   name: name,
   email: email,
   key: key

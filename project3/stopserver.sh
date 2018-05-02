@@ -1,4 +1,4 @@
 #!/bin/bash
-
-redis-cli shutdown
+#redis-cli shutdown
 kill -9 $(cat "./tmp/pids/server.pid")
+
