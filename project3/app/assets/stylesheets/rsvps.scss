@@ -3,28 +3,22 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .container_rsvps_index {
-	display: flex;
-	justify-content: flex-end;
-	flex-wrap: wrap;
-	margin: 0 auto;
 	color: white;
-	padding-top: 210px;
-	padding-right: 300px;
+	padding-top: 2em;
 
 }
 
 .container_rsvps_show {
-	display: flex;
-	justify-content: flex-end;
-	flex-wrap: wrap;
-	margin: 0 auto;
 	color: white;
-	padding-top: 210px;
-	padding-right: 300px;
+	padding-top: 2em;
 
+}
+
+.rsvps-grid-item2 {
+	text-align: center;
 }
 
 h41 {
 	font-family: "Gloria Hallelujah", cursive;
-	font-size: 50px;
+	font-size: 2em;
 }

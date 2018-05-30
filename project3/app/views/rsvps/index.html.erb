@@ -1,6 +1,6 @@
-<div class="container_rsvps_index">
+<div class="container container_rsvps_index">
 
-    <div class="row_rsvps_index">
+    <div class="row row_rsvps_index">
 
             <div class="rsvps-grid-item1 col-sm-12">
 
@@ -31,16 +31,16 @@
                         </table>
             </div>
     </div>
-    <div class="row_rsvps_index2">
+    <div class="row row_rsvps_index2">
 
             <div class="rsvps-grid-item2 col-sm-12">
 
                         <% if @rsvps.size > 0 %>
-                            <%= link_to 'Edit', edit_user_event_rsvp_list_path(@event), :class => "btn btn-outline-light" %><br>
+                            <%= link_to 'Edit', edit_user_event_rsvp_list_path(@event), :class => "btn btn-outline-light" %>
                         <% else %>
-                            <%= link_to 'Add', new_event_rsvp_path(@event), :class => "btn btn-outline-light" %><br>
+                            <%= link_to 'Add', new_event_rsvp_path(@event), :class => "btn btn-outline-light" %>
                         <% end %>
-                        <%= link_to 'Back', user_events_path(current_user.id), :class => "btn btn-outline-light" %><br>
+                        <%= link_to 'Back', user_events_path(current_user.id), :class => "btn btn-outline-light" %>
 
                         <% if @user.nil? %>
                             <%= link_to 'Export as CSV', export_event_rsvps_path, :class => "btn btn-outline-light" %>

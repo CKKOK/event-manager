@@ -8,9 +8,8 @@
 	text-align: center;
 	margin: 0 auto;
 	color: white;
-	padding-top: 210px;
+	padding-top: 2em;
 	flex-wrap: wrap;
-	padding-right: 400px;
 
 }
 
@@ -20,55 +19,75 @@
 	flex-direction: column;
 	margin: 0 auto;
 	color: white;
-	padding-top: 180px;
-	padding-left: 960px;
+	padding-top: 2em;
 
 }
 
 .container_foobar2 {
 	display: flex;
 	flex-wrap: wrap;
-	padding-left: 960px;
 }
 
 .container_sessions {
 	display: flex;
-	justify-content: flex-end;
+	// justify-content: flex-end;
+	justify-content: center;
 	margin: 0 auto;
 	color: white;
-	padding-top: 210px;
+	padding-top: 2em;
 	text-align: center;
-	padding-right: 460px;
+	// padding-right: 460px;
 	flex-wrap: wrap;
 
 }
 
+.user_edit_form {
+	color: white;
+}
+
+.actions {
+	text-align: center;
+}
+.edit-form-btn {
+	text-align: center;
+}
 .container_sessions2 {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: center;
 	margin: 0 auto;
 	color: white;
-	padding-top: 210px;
+	padding-top: 2em;
 	text-align: center;
 }
 
+.wedding-grid-item2 {
+	margin-top: 2em;
+}
+
 h20 {
+	display: block;
+	width: 100%;
 	font-family: "Gloria Hallelujah", cursive;
-	font-size: 50px;
-	margin-bottom: 130px;
+	font-size: 2.5em;
 }
 
 h21 {
+	display: block;
+	width: 100%;
 	font-family: "Gloria Hallelujah", cursive;
-	font-size: 50px;
+	font-size: 2.25em;
 }
 
 h22 {
+	display: block;
+	width: 100%;
 	font-family: "Gloria Hallelujah", cursive;
-	font-size: 50px;
+	font-size: 2em;
 }
 
 h23 {
+	display: block;
+	width: 100%;
 	font-family: "Gloria Hallelujah", cursive;
-	font-size: 50px;
+	font-size: 1.8em;
 }

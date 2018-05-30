@@ -41,50 +41,26 @@ p {
 	text-align: center;
 }
 
-.container_mainbar {
-	display: flex;
-	justify-content: flex-end;
-	text-align: center;
-	margin: 0 auto;
-	color: white;
-	padding-top: 210px;
-	flex-wrap: wrap;
-	padding-right: 380px;
-
-}
-
-.container_mainbar2 {
-	display: flex;
-	justify-content: center;
-	text-align: center;
-	margin: 0 auto;
-	color: white;
-	padding-top: 210px;
-	
-}
-
 #page1 {
-	height: 950px;
+	height: 100%;
+	padding-top: 2em;
 }
 
-#page2 {
-	height: 1000px;
-	background-image: asset-url('anna-utochkina-570935-unsplash.jpg');
-	background-size: 100%;
-	background-repeat: no-repeat;
-}
-
-#page3 {
-	height: 1000px;
-	background-image: asset-url('pedro-de-sousa-391080-unsplash.jpg');
-	background-size: 100%;
-	background-repeat: no-repeat;
-}
-
-h10 {
+.title {
 	font-family: "Gloria Hallelujah", cursive;
-	font-size: 60px;
+	font-size: 4em;
+	color: white;
+	text-align:center;
+}
 
+.subtitle {
+	font-size: 1em;
+	color: white;
+	text-align:center;
+}
+
+.main-page-form {
+	text-align: center;
 }
 
 

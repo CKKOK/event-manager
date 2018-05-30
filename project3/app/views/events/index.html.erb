@@ -1,6 +1,6 @@
 <div class="container_index">
     <div class="row">
-        <div class="events-grid-item1 col-sm-10">
+        <div class="events-grid-item1 col-sm-12">
 
           <h31>Events</h31>
    
@@ -8,11 +8,11 @@
                     <thead>
                     <tr>
                       <th scope="col">#</th>
-                      <th scope="col">DateTime</th>
+                      <th scope="col">Time</th>
                       <th scope="col">Title</th>
                       <th scope="col">Show</th>
                       <th scope="col">Edit</th>
-                      <th scope="col">Destroy</th>
+                      <th scope="col">Remove</th>
                       <th scope="col">RSVPs</th>
                       <th scope="col">Start</th>
                       <th scope="col">Scanner</th>
@@ -38,17 +38,18 @@
                     <% end %>
                     </tbody>
                 </table>
+                <div class="row-of-buttons">
+                  <%= link_to 'Create Event', new_user_event_path(@user), :class => "btn btn-outline-light"%>
+                  <%= link_to 'Back', user_path(@user), :class => "btn btn-outline-light" %>
+                </div>
 
-                <%= link_to 'Create Event', new_user_event_path(@user), :class => "btn btn-outline-light"%>
-                <%= link_to 'Back', user_path(@user), :class => "btn btn-outline-light" %>
-
-          <h1>Invited Event</h1>
+          <h1 class="section-2-title">Invited Event</h1>
 
                 <table class="table table-hover">
                   <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">DateTime</th>
+                    <th scope="col">Date</th>
                     <th scope="col">Title</th>
                     <th scope="col">My RSVP</th>
                   </tr>

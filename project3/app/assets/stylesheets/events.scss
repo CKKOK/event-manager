@@ -4,30 +4,35 @@
 
 .container_index {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: center;
 	margin: 0 auto;
 	color: white;
-	padding-top: 210px;
-	padding-right: 300px;
+	padding-top: 2em;
 
 }
 
 .container_new {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: center;
 	text-align: center;
 	margin: 0 auto;
 	color: white;
-	padding-top: 210px;
-	padding-right: 300px;
+	padding-top: 2em;
 }
-
+.row-of-buttons {
+	width: 100%;
+	text-align: center;
+}
 h31 {
 	font-family: "Gloria Hallelujah", cursive;
-	font-size: 50px;
+	font-size: 2em;
 }
 
 h32 {
 	font-family: "Gloria Hallelujah", cursive;
-	font-size: 50px;
+	font-size: 2em;
+}
+
+.section-2-title{
+	margin-top: 2em;
 }
